@@ -15,7 +15,7 @@ Eプロスロットのプログラム開発用
   1. 機能ごとにブランチを切る。
   2. コミットメッセージは適切に書く。
 ## 参考
-#### ヘッダファイルの書き方
-https://c-lang.sevendays-study.com/day7.html
+#### ライブラリの自作
+https://nobita-rx7.hatenablog.com/entry/28488026
 #### コミットメッセージの書き方
 https://qiita.com/konatsu_p/items/dfe199ebe3a7d2010b3e

@@ -1,15 +1,28 @@
-#include <Stepper.h>
-
-int around_step = 200;  // 1回転ステップ数
-int step = 10;
-int speed =80;   // 回転スピード(rpm）
-
-Stepper stepper(around_step, 4,5,6,7);
+//#include <Stepper.h>
+#include "StepperMotor.h"
+int speed = 80;
+StepperMotor motor1(speed, 4, 5, 6, 7);
 
 void setup() {
-  stepper.setSpeed(speed);
+  motor1.rotateAngle(90);
+  delay(500);
+  motor1.rotateAngle(90);
+  delay(500);
+  motor1.rotateAngle(90);
+  delay(500);
+  motor1.rotateAngle(90);
+  delay(500);
+
+  motor1.rotateAngle(-90);
+  delay(500);
+  motor1.rotateAngle(-90);
+  delay(500);
+  motor1.rotateAngle(-90);
+  delay(500);
+  motor1.rotateAngle(-90);
+  delay(500);
 }
 
 void loop() {
-  stepper.step(step);
+  
 }

@@ -5,6 +5,6 @@ private:
   int m_pin;
 public:
   MyCppTest(int pin);
-  High();
-  Low();
+  void High();
+  void Low();
 };

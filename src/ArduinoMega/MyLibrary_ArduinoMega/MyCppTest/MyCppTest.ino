@@ -1,9 +1,9 @@
-#include "../MyCppTest.h"
+#include "MyCppTest.h"
 
 MyCppTest led1(10);
 
 void setup(){
-
+Serial.begin(9600);
 }
 
 void loop() {

@@ -28,7 +28,7 @@ TwoDigitsSegmentLed::TwoDigitsSegmentLed(int pinA1, int pinB1, int pinC1,
   pinMode(m_pinG2, OUTPUT);
 }
 
-TwoDigitsSegmentLed::DisplayNumber(int n){
+void TwoDigitsSegmentLed::DisplayNumber(int n){
   m_num = n;
   m_tens = GetTensPlace(m_num);
   m_ones = GetOnesPlace(m_num);
@@ -66,7 +66,7 @@ TwoDigitsSegmentLed::DisplayNumber(int n){
     displayNine(kTens_place);
     break;
   default:
-    println("ERR 0-9で指定してください。");
+    //println("ERR 0-9で指定してください。");
     break;
   }
 
@@ -103,7 +103,7 @@ TwoDigitsSegmentLed::DisplayNumber(int n){
     displayNine(kOnes_place);
     break;
   default:
-    println("ERR 0-9で指定してください。");
+    //println("ERR 0-9で指定してください。");
     break;
   }
 }
@@ -116,15 +116,15 @@ int TwoDigitsSegmentLed::GetTensPlace(int n){
   return n / 10;
 }
 
-TwoDigitsSegmentLed::setHIGH(int pin){
+void TwoDigitsSegmentLed::setHIGH(int pin){
   digitalWrite(pin, HIGH);
 }
 
-TwoDigitsSegmentLed::setLOW(int pin){
+void TwoDigitsSegmentLed::setLOW(int pin){
   digitalWrite(pin, LOW);
 }
 
-TwoDigitsSegmentLed::displayZero(int place){
+void TwoDigitsSegmentLed::displayZero(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -143,7 +143,7 @@ TwoDigitsSegmentLed::displayZero(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayOne(int place){
+void TwoDigitsSegmentLed::displayOne(int place){
   turnOffAllLed();
   if(place ==1){
     setHIGH(m_pinB1);
@@ -154,7 +154,7 @@ TwoDigitsSegmentLed::displayOne(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayTwo(int place){
+void TwoDigitsSegmentLed::displayTwo(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -171,7 +171,7 @@ TwoDigitsSegmentLed::displayTwo(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayThree(int place){
+void TwoDigitsSegmentLed::displayThree(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -188,7 +188,7 @@ TwoDigitsSegmentLed::displayThree(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayFour(int place){
+void TwoDigitsSegmentLed::displayFour(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinF1);
@@ -203,7 +203,7 @@ TwoDigitsSegmentLed::displayFour(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayFive(int place){
+void TwoDigitsSegmentLed::displayFive(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -220,7 +220,7 @@ TwoDigitsSegmentLed::displayFive(int place){
   }
 }
 
-TwoDigitsSegmentLed::displaySix(int place){
+void TwoDigitsSegmentLed::displaySix(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -239,7 +239,7 @@ TwoDigitsSegmentLed::displaySix(int place){
   }
 }
 
-TwoDigitsSegmentLed::displaySeven(int place){
+void TwoDigitsSegmentLed::displaySeven(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinF1);
@@ -254,7 +254,7 @@ TwoDigitsSegmentLed::displaySeven(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayEight(int place){
+void TwoDigitsSegmentLed::displayEight(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -275,7 +275,7 @@ TwoDigitsSegmentLed::displayEight(int place){
   }
 }
 
-TwoDigitsSegmentLed::displayNine(int place){
+void TwoDigitsSegmentLed::displayNine(int place){
   turnOffAllLed();
   if(place == 1){
     setHIGH(m_pinA1);
@@ -292,7 +292,7 @@ TwoDigitsSegmentLed::displayNine(int place){
   }
 }
 
-TwoDigitsSegmentLed::TurnOffAllLed(){
+void TwoDigitsSegmentLed::TurnOffAllLed(){
   setLOW(m_pinA1);
   setLOW(m_pinB1);
   setLOW(m_pinC1);

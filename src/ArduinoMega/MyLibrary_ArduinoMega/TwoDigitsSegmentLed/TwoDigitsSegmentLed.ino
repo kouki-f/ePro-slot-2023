@@ -8,7 +8,7 @@ void setup() {
 void loop() {
   for(int i=0;i<100;i++){
     TwoSeg.DisplayNumber(i);
-    delay(100);
+    delay(200);
   }
 TwoSeg.turnOffAllLed();
 delay(1000);

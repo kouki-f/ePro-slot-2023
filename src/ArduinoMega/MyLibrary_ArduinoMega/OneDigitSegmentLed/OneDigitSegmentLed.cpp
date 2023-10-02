@@ -13,7 +13,7 @@ OneDigitSegmentLed::OneDigitSegmentLed(int pinA, int pinB, int pinC, int pinD, i
   pinMode(m_pinG, OUTPUT);
 }
 
-OneDigitSegmentLed::displayNumber(int n){
+void OneDigitSegmentLed::displayNumber(int n){
   m_num = n;
   switch (m_num)
   {
@@ -48,20 +48,20 @@ OneDigitSegmentLed::displayNumber(int n){
     displayNine();
     break;
   default:
-    println("ERR 0-9で指定してください。");
+    //println("ERR 0-9で指定してください。");
     break;
   }
 }
 
-OneDigitSegmentLed::setHIGH(int pin){
+void OneDigitSegmentLed::setHIGH(int pin){
   digitalWrite(pin, HIGH);
 }
 
-OneDigitSegmentLed::setLOW(int pin){
+void OneDigitSegmentLed::setLOW(int pin){
   digitalWrite(pin, LOW);
 }
 
-OneDigitSegmentLed::displayZero(){
+void OneDigitSegmentLed::displayZero(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -71,13 +71,13 @@ OneDigitSegmentLed::displayZero(){
   setHIGH(m_pinF);
 }
 
-OneDigitSegmentLed::displayOne(){
+void OneDigitSegmentLed::displayOne(){
   turnOffAllLed();
   setHIGH(m_pinB);
   setHIGH(m_pinB);
 }
 
-OneDigitSegmentLed::displayTwo(){
+void OneDigitSegmentLed::displayTwo(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -86,7 +86,7 @@ OneDigitSegmentLed::displayTwo(){
   setHIGH(m_pinD);
 }
 
-OneDigitSegmentLed::displayThree(){
+void OneDigitSegmentLed::displayThree(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -95,7 +95,7 @@ OneDigitSegmentLed::displayThree(){
   setHIGH(m_pinD);
 }
 
-OneDigitSegmentLed::displayFour(){
+void OneDigitSegmentLed::displayFour(){
   turnOffAllLed();
   setHIGH(m_pinF);
   setHIGH(m_pinG);
@@ -103,7 +103,7 @@ OneDigitSegmentLed::displayFour(){
   setHIGH(m_pinC);
 }
 
-OneDigitSegmentLed::displayFive(){
+void OneDigitSegmentLed::displayFive(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinF);
@@ -112,7 +112,7 @@ OneDigitSegmentLed::displayFive(){
   setHIGH(m_pinD);
 }
 
-OneDigitSegmentLed::displaySix(){
+void OneDigitSegmentLed::displaySix(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinF);
@@ -122,7 +122,7 @@ OneDigitSegmentLed::displaySix(){
   setHIGH(m_pinC);
 }
 
-OneDigitSegmentLed::displaySeven(){
+void OneDigitSegmentLed::displaySeven(){
   turnOffAllLed();
   setHIGH(m_pinF);
   setHIGH(m_pinA);
@@ -130,7 +130,7 @@ OneDigitSegmentLed::displaySeven(){
   setHIGH(m_pinC);
 }
 
-OneDigitSegmentLed::displayEight(){
+void OneDigitSegmentLed::displayEight(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -141,7 +141,7 @@ OneDigitSegmentLed::displayEight(){
   setHIGH(m_pinG);
 }
 
-OneDigitSegmentLed::displayNine(){
+void OneDigitSegmentLed::displayNine(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinF);
@@ -150,7 +150,7 @@ OneDigitSegmentLed::displayNine(){
   setHIGH(m_pinC);
 }
 
-OneDigitSegmentLed::turnOffAllLed(){
+void OneDigitSegmentLed::turnOffAllLed(){
   setLOW(m_pinA);
   setLOW(m_pinB);
   setLOW(m_pinC);

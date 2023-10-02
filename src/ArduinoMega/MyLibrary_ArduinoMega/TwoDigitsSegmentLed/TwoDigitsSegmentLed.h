@@ -7,10 +7,11 @@ class TwoDigitsSegmentLed{
         m_pinG1, m_pinA2, m_pinB2,
         m_pinC2, m_pinD2, m_pinE2,
         m_pinF2, m_pinG2;
+        
     int m_num;
     int m_tens, m_ones;
-    const int kTens_place = 1;
-    const int kOnes_place = 2;
+    const int kOnes_place = 1;
+    const int kTens_place = 2;
 
     int GetTensPlace(int n);  //十の位の数字を取得
     int GetOnesPlace(int n);  //一の位の数字を取得
@@ -26,7 +27,8 @@ class TwoDigitsSegmentLed{
     void displayNine(int place);
     void setHIGH(int pin);
     void setLOW(int pin);
-
+    void displayOnesPlace(int ones);
+    void displayTensPlace(int tens);
   public:
     TwoDigitsSegmentLed(int pinA1, int pinB1, int pinC1,
                         int pinD1, int pinE1, int pinF1,
@@ -35,5 +37,5 @@ class TwoDigitsSegmentLed{
                         int pinF2, int pinG2);
 
     void DisplayNumber(int n);
-    void TurnOffAllLed();
+    void turnOffAllLed();
 };

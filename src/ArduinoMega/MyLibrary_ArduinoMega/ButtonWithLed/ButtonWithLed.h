@@ -5,10 +5,9 @@ class ButtonWithLed
 private:
   int m_ledPin;
   int m_bnPin;
-  //bool m_isBnPressed;
 public:
-  ButtonWithLed(int bn_pin, int led_pin);
+  ButtonWithLed(int bnPin, int ledPin);
   bool readButton();
-  void ledOn();
-  void ledOff();
+  void turnOn();
+  void turnOff();
 };

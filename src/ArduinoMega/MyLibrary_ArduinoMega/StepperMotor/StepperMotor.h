@@ -13,4 +13,5 @@ public:
   StepperMotor(int speed, int pinA1, int pinA2, int pinB1, int pinB2);
   void setSpeed(int speed);
   void rotateAngle(int angle);
+  void step(int step);
 };

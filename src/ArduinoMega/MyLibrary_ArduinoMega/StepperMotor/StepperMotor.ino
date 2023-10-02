@@ -9,7 +9,7 @@ void setup() {
 
 void loop() {
   while(digitalRead(10)){
-    motor1.rotateAngle(5);    
+    motor1.rotateAngle(5);
   }
   while(1){}
 }

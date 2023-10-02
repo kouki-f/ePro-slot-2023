@@ -22,6 +22,7 @@ class ThreeDigitsSegmentLed{
     int GetTensPlace(int n);  //十の位の数字を取得
     int GetOnesPlace(int n);  //一の位の数字を取得
     void CaseOfDisplayNum(int n);
+    void SegDelay();
   public:
     ThreeDigitsSegmentLed(int pinA, int pinB, int pinC, int pinD, int pinE, int pinF, int pinG, int pin1, int pin2, int pin3);
     void DisplayNumber(int n);

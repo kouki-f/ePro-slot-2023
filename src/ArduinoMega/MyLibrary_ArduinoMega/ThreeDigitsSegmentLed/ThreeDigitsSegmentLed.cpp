@@ -16,7 +16,7 @@ ThreeDigitsSegmentLed::ThreeDigitsSegmentLed(int pinA, int pinB, int pinC, int p
   pinMode(m_pin3, OUTPUT);
 }
 
-ThreeDigitsSegmentLed::DisplayNumber(int n){  //ループ無し
+void ThreeDigitsSegmentLed::DisplayNumber(int n){  //ループ無し
   m_num = n;
   m_hundred_num = GetHundredPlace(m_num);
   m_ten_num = GetTensPlace(m_num);
@@ -25,18 +25,18 @@ ThreeDigitsSegmentLed::DisplayNumber(int n){  //ループ無し
   CaseOfDisplayNum(m_hundred_num);
   setHIGH(m_pin1);
   CaseOfDisplayNum(m_ten_num);
-  delay(50);
+  SegDelay();
   setLOW(m_pin1);
   setHIGH(m_pin2);
   CaseOfDisplayNum(m_one_num);
-  delay(50);
+  SegDelay();
   setLOW(m_pin2);
   setHIGH(m_pin3);
-  delay(50);
+  SegDelay();
   setLOW(m_pin3);
 }
 
-ThreeDigitsSegmentLed::CaseOfDisplayNum(int n){
+void ThreeDigitsSegmentLed::CaseOfDisplayNum(int n){
   switch (n)
   {
   case 0:
@@ -70,32 +70,35 @@ ThreeDigitsSegmentLed::CaseOfDisplayNum(int n){
     displayNine();
     break;
   default:
-    println("ERR 0-9で指定してください。");
     break;
   }
 }
 
-ThreeDigitsSegmentLed::GetOnesPlace(int n){
+void ThreeDigitsSegmentLed::SegDelay(){
+  delay(10);
+}
+
+int ThreeDigitsSegmentLed::GetOnesPlace(int n){
   return n % 10;
 }
 
-ThreeDigitsSegmentLed::GetTensPlace(int n){
+int ThreeDigitsSegmentLed::GetTensPlace(int n){
   return (n % 100) - GetOnesPlace();
 }
 
-ThreeDigitsSegmentLed::GetHundredPlace(int n){
+int ThreeDigitsSegmentLed::GetHundredPlace(int n){
   return n / 100;
 }
 
-ThreeDigitsSegmentLed::setHIGH(int pin){
+void ThreeDigitsSegmentLed::setHIGH(int pin){
   digitalWrite(pin, HIGH);
 }
 
-ThreeDigitsSegmentLed::setLOW(int pin){
+void ThreeDigitsSegmentLed::setLOW(int pin){
   digitalWrite(pin, LOW);
 }
 
-ThreeDigitsSegmentLed::displayZero(){
+void ThreeDigitsSegmentLed::displayZero(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -105,13 +108,13 @@ ThreeDigitsSegmentLed::displayZero(){
   setHIGH(m_pinF);
 }
 
-ThreeDigitsSegmentLed::displayOne(){
+void ThreeDigitsSegmentLed::displayOne(){
   turnOffAllLed();
   setHIGH(m_pinB);
   setHIGH(m_pinB);
 }
 
-ThreeDigitsSegmentLed::displayTwo(){
+void ThreeDigitsSegmentLed::displayTwo(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -120,7 +123,7 @@ ThreeDigitsSegmentLed::displayTwo(){
   setHIGH(m_pinD);
 }
 
-ThreeDigitsSegmentLed::displayThree(){
+void ThreeDigitsSegmentLed::displayThree(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -129,7 +132,7 @@ ThreeDigitsSegmentLed::displayThree(){
   setHIGH(m_pinD);
 }
 
-ThreeDigitsSegmentLed::displayFour(){
+void ThreeDigitsSegmentLed::displayFour(){
   turnOffAllLed();
   setHIGH(m_pinF);
   setHIGH(m_pinG);
@@ -137,7 +140,7 @@ ThreeDigitsSegmentLed::displayFour(){
   setHIGH(m_pinC);
 }
 
-ThreeDigitsSegmentLed::displayFive(){
+void ThreeDigitsSegmentLed::displayFive(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinF);
@@ -146,7 +149,7 @@ ThreeDigitsSegmentLed::displayFive(){
   setHIGH(m_pinD);
 }
 
-ThreeDigitsSegmentLed::displaySix(){
+void ThreeDigitsSegmentLed::displaySix(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinF);
@@ -156,7 +159,7 @@ ThreeDigitsSegmentLed::displaySix(){
   setHIGH(m_pinC);
 }
 
-ThreeDigitsSegmentLed::displaySeven(){
+void ThreeDigitsSegmentLed::displaySeven(){
   turnOffAllLed();
   setHIGH(m_pinF);
   setHIGH(m_pinA);
@@ -164,7 +167,7 @@ ThreeDigitsSegmentLed::displaySeven(){
   setHIGH(m_pinC);
 }
 
-ThreeDigitsSegmentLed::displayEight(){
+void ThreeDigitsSegmentLed::displayEight(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinB);
@@ -175,7 +178,7 @@ ThreeDigitsSegmentLed::displayEight(){
   setHIGH(m_pinG);
 }
 
-ThreeDigitsSegmentLed::displayNine(){
+void ThreeDigitsSegmentLed::displayNine(){
   turnOffAllLed();
   setHIGH(m_pinA);
   setHIGH(m_pinF);
@@ -184,7 +187,7 @@ ThreeDigitsSegmentLed::displayNine(){
   setHIGH(m_pinC);
 }
 
-ThreeDigitsSegmentLed::turnOffAllLed(){
+void ThreeDigitsSegmentLed::turnOffAllLed(){
   setLOW(m_pinA);
   setLOW(m_pinB);
   setLOW(m_pinC);

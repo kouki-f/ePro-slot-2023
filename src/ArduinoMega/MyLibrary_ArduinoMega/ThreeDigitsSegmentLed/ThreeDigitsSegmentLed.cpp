@@ -2,7 +2,8 @@
 #include <Arduino.h>
 
 ThreeDigitsSegmentLed::ThreeDigitsSegmentLed(int pinA, int pinB, int pinC, int pinD, int pinE, int pinF, int pinG, int pin1, int pin2, int pin3){
-  m_pinA = pinA; m_pinB= pinB; m_pinC = pinC; m_pinD = pinD; m_pinE = pinE; m_pinF = pinF; m_pinG = pinG; m_pin1 = pin1; m_pin2 = pin2; m_pin3 = pin3;
+  m_pinA = pinA; m_pinB= pinB; m_pinC = pinC; m_pinD = pinD; m_pinE = pinE;
+  m_pinF = pinF; m_pinG = pinG; m_pin1 = pin1; m_pin2 = pin2; m_pin3 = pin3;
 
   pinMode(m_pinA, OUTPUT);
   pinMode(m_pinB, OUTPUT);

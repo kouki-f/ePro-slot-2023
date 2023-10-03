@@ -4,7 +4,7 @@
 ButtonWithLed::ButtonWithLed(int bnPin, int ledPin){
   m_bnPin = bnPin;
   m_ledPin = ledPin;
-  pinMode(m_bnPin, INPUT_PULL_UP);
+  pinMode(m_bnPin, INPUT_PULLUP);
   pinMode(m_ledPin, OUTPUT);
 }
 

@@ -15,7 +15,5 @@ private:
   ButtonWithLed startBN, stopBN1, stopBN2, stopBN3, betBN, payBN;
   CoinSelector coinSelector;
 public:
-  GameController(int* array, int size);
-  void StepperMotor1Init(int speed, int pinA1, int pinA2, int pinB1, int pinB2);
-  void test();
+  GameController(int* array);
 };

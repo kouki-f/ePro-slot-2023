@@ -1,6 +1,6 @@
 #include "GameController.h"
 
-int myArray[] = {80, 2, 3, 4, 5,  //motor1 speed, A1, A2, B1, B2
+int pinArray[] = {80, 2, 3, 4, 5,  //motor1 speed, A1, A2, B1, B2
                  80, 6, 7, 8, 9,  //motor2 speed, A1, A2, B1, B2
                  80, 10, 11, 12, 13,  //motor3 speed, A1, A2, B1, B2
                  15, 14,  //mp3Player rx, tx
@@ -22,9 +22,9 @@ int myArray[] = {80, 2, 3, 4, 5,  //motor1 speed, A1, A2, B1, B2
                  A15  //Hopper
                  };
 
-int arraySize = sizeof(myArray) / sizeof(myArray[0]);
+int arraySize = sizeof(pinArray) / sizeof(pinArray[0]);
 
-GameController game(myArray, arraySize);
+GameController game(pinArray, arraySize);
 //game.StepperMotor1Init(80, 2, 3, 4, 5);
 
 void setup() {

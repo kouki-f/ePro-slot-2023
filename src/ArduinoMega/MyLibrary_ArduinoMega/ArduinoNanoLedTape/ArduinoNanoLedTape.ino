@@ -1,9 +1,11 @@
-void setup() {
-  // put your setup code here, to run once:
+#include "ArduinoNanoLedTape.h"
 
+ArduinoNanoLedTape nanoTapeUart(18, 19);
+
+void setup() {
+  nanoTapeUart.begin();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  nanoTapeUart.test();
 }

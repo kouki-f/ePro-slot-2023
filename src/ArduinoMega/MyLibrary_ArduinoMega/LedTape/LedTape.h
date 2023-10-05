@@ -6,4 +6,6 @@ private:
 public:
   LedTape(int tx, int rx);
   bool begin();
+  void test1();
+  void test2();
 };

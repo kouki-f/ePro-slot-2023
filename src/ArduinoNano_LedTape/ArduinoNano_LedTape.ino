@@ -7,7 +7,7 @@ Adafruit_NeoPixel pixels(LED_COUNT, DIN_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
   //Serial.begin(9600);
-  pixels.begin();  
+  pixels.begin();
 }
 
 // uint32_t red = pixels.Color(128, 0, 0);

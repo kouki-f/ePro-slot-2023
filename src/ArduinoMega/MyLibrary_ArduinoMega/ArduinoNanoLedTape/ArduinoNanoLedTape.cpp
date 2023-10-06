@@ -9,14 +9,17 @@ ArduinoNanoLedTape::ArduinoNanoLedTape(int tx, int rx)
 bool ArduinoNanoLedTape::begin(){
   if(m_tx==18 and m_rx==19){
     Serial1.begin(9600);
+    ledTape.m_serialNum = 1;
     return true;
   }else if (m_tx==16 && m_rx==17)
   {
     Serial2.begin(9600);
+    ledTape.m_serialNum = 2;
     return true;
   }else if (m_tx==14 && m_rx==15)
   {
     Serial3.begin(9600);
+    ledTape.m_serialNum = 3;
     return true;
   }else{
     return false;  //uart pin error
@@ -24,5 +27,5 @@ bool ArduinoNanoLedTape::begin(){
 }
 
 void ArduinoNanoLedTape::test1(){
-  Serial1.write('1');
+  ledTape.serialSendData(5);
 }

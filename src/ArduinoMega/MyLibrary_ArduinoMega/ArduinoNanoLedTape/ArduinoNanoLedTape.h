@@ -2,6 +2,7 @@
 
 class ArduinoNanoLedTape{
 private:
+  LedTape ledTape;
   int m_tx;
   int m_rx;
 public:

@@ -1,9 +1,13 @@
-void setup() {
-  // put your setup code here, to run once:
+#include "Hopper.h"
 
+int motor_pin = 2;
+int motor_photo = 3;
+
+Hopper hopper(motor_pin, motor_photo);
+
+void setup() {
+  hopper.payOutCoin(5);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
 }

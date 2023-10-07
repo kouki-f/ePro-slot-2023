@@ -8,7 +8,7 @@ GameController::GameController(int* array, int size):
   motor3(array[10], array[11], array[12], array[13], array[14]),
   SE(array[15], array[16]),
   nanoLedTape(array[17], array[18]),
-  // <- nano2
+  nanoMatrix(array[19], array[20]),
   hopper(array[21], array[22]),
   startBN(array[23], array[24]),
   stopBN1(array[25], array[26]),
@@ -18,7 +18,7 @@ GameController::GameController(int* array, int size):
   payBN(array[34], array[35]),
   oneDigitSeg(array[36], array[37], array[38], array[39], array[40], array[41], array[42]),
   twoDigitsSeg(array[43], array[44], array[45], array[46], array[47], array[48], array[49], array[50], array[51], array[52], array[53], array[54], array[55], array[56]),
-  // <- 7seg3
+  threeDigitsSeg(array[57], array[58], array[59], array[60], array[61], array[62], array[63], array[64], array[65], array[66]),
   motorPhoto1(array[67]),
   motorPhoto2(array[68]),
   motorPhoto3(array[69])

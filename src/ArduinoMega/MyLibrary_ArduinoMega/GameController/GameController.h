@@ -5,15 +5,19 @@
 #include "SoundEffect.h"
 #include "ButtonWithLed.h"
 #include "CoinSelector.h"
+#include "Photointerrupter.h"
+#include "Hopper.h"
 
 class GameController{
 private:
-  StepperMotor motor1, motor2, motor3;
-  OneDigitSegmentLed oneDigitSeg;
+  StepperMotor        motor1, motor2, motor3;
+  OneDigitSegmentLed  oneDigitSeg;
   TwoDigitsSegmentLed twoDigitsSeg;
-  SoundEffect SE;
-  ButtonWithLed startBN, stopBN1, stopBN2, stopBN3, betBN, payBN;
-  CoinSelector coinSelector;
+  SoundEffect         SE;
+  ButtonWithLed       startBN, stopBN1, stopBN2, stopBN3, betBN, payBN;
+  CoinSelector        coinSelector;
+  Photointerrupter    motorPhoto1, motorPhoto2, motorPhoto3;
+  Hopper              hopper;
 public:
   GameController(int* array);
 };

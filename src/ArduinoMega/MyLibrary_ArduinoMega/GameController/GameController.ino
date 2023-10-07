@@ -22,16 +22,12 @@ int pinArray[] = {
                   53  //PhotoSensor3
                   };
 
-//int arraySize = sizeof(pinArray) / sizeof(pinArray[0]);
-
 GameController game(pinArray);
 
 void setup() {
-  // put your setup code here, to run once:
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
 }

@@ -7,6 +7,7 @@
 #include "CoinSelector.h"
 #include "Photointerrupter.h"
 #include "Hopper.h"
+#include "ArduinoNanoLedTape.h"
 
 class GameController{
 private:
@@ -18,6 +19,7 @@ private:
   CoinSelector        coinSelector;
   Photointerrupter    motorPhoto1, motorPhoto2, motorPhoto3;
   Hopper              hopper;
+  ArduinoNanoLedTape  nanoLedTape;
 public:
   GameController(int* array);
 };

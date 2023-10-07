@@ -7,7 +7,7 @@ GameController::GameController(int* array, int size):
   motor2(array[5], array[6], array[7], array[8], array[9]),
   motor3(array[10], array[11], array[12], array[13], array[14]),
   SE(array[15], array[16]),
-  // <- nano1
+  nanoLedTape(array[17], array[18]),
   // <- nano2
   hopper(array[21], array[22]),
   startBN(array[23], array[24]),

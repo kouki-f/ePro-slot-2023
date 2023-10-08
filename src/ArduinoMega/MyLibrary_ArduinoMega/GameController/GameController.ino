@@ -9,7 +9,7 @@ int pinArray[] = {
                   19, 18,  //Nano1 rx, tx
                   20, A15,// Hopper
                   22, 23,  // startBN bn, led
-                  24, 25   //stopBN1 bn, led
+                  24, 25,   //stopBN1 bn, led
                   26, 27,  //stopBN2 bn, led
                   28, 29,  //stopBN3 bn, led
                   30, 31,  //betBN bn, led
@@ -19,13 +19,13 @@ int pinArray[] = {
                   41, 42, 43, 44, 45, 46, 47, 48, 49, 50,  //7seg3
                   51,  //PhotoSensor1
                   52,  //PhotoSensor2
-                  53  //PhotoSensor3
+                  53,  //PhotoSensor3
+                  21  //coinSelector Din
                   };
 
 GameController game(pinArray);
 
 void setup() {
-
 }
 
 void loop() {

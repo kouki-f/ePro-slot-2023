@@ -2,9 +2,9 @@
 
 class CoinSelector{
 private:
-  int m_player_coin_count = 0;
   int m_pin;
-  void incrementPlayerCoinCount();
+  static volatile int m_player_coin_count;
+  static void incrementPlayerCoinCount();
   
 public:
   CoinSelector(int pin);

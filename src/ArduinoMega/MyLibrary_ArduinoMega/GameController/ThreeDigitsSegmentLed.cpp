@@ -84,7 +84,7 @@ int ThreeDigitsSegmentLed::GetOnesPlace(int n){
 }
 
 int ThreeDigitsSegmentLed::GetTensPlace(int n){
-  return (n % 100) - GetOnesPlace();
+  return (n % 100) - GetOnesPlace(n);
 }
 
 int ThreeDigitsSegmentLed::GetHundredPlace(int n){

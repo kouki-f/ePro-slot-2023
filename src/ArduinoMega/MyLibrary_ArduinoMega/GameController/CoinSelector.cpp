@@ -1,6 +1,8 @@
 #include "CoinSelector.h"
 #include "Arduino.h"
 
+volatile int CoinSelector::m_player_coin_count = 0;
+
 CoinSelector::CoinSelector(int pin)
 {
   m_pin = pin;
@@ -8,8 +10,8 @@ CoinSelector::CoinSelector(int pin)
   attachInterrupt(digitalPinToInterrupt(m_pin), incrementPlayerCoinCount, RISING);
 }
 
-void CoinSelector::incrementPlayerCoinCount(){
-  m_player_coin_count++;
+static void CoinSelector::incrementPlayerCoinCount(){
+  m_player_coin_count += 1;
 }
 
 int CoinSelector::nowPlayerCoinCount(){

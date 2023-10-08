@@ -16,7 +16,7 @@ private:
   OneDigitSegmentLed    oneDigitSeg;
   TwoDigitsSegmentLed   twoDigitsSeg;
   ThreeDigitsSegmentLed threeDigitsSeg;
-  SoundEffect           SE;
+  SoundEffect           soundEffect;
   ButtonWithLed         startBN, stopBN1, stopBN2, stopBN3, betBN, payBN;
   CoinSelector          coinSelector;
   Photointerrupter      motorPhoto1, motorPhoto2, motorPhoto3;

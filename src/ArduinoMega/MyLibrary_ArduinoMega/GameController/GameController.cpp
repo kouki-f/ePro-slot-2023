@@ -2,11 +2,11 @@
 #include "GameController.h"
 #include "Arduino.h"
 
-GameController::GameController(int* array, int size):
+GameController::GameController(int* array):
   motor1(array[0], array[1], array[2], array[3], array[4]),
   motor2(array[5], array[6], array[7], array[8], array[9]),
   motor3(array[10], array[11], array[12], array[13], array[14]),
-  SE(array[15], array[16]),
+  soundEffect(array[15], array[16]),
   nanoLedTape(array[17], array[18]),
   nanoMatrix(array[19], array[20]),
   hopper(array[21], array[22]),
@@ -21,6 +21,7 @@ GameController::GameController(int* array, int size):
   threeDigitsSeg(array[57], array[58], array[59], array[60], array[61], array[62], array[63], array[64], array[65], array[66]),
   motorPhoto1(array[67]),
   motorPhoto2(array[68]),
-  motorPhoto3(array[69])
+  motorPhoto3(array[69]),
+  coinSelector(array[70])
 {
 }

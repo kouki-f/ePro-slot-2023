@@ -24,3 +24,16 @@ GameController::GameController(int* array):
   coinSelector(array[70])
 {
 }
+
+Reel::lot(int bet){
+  swich(bet){
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    default:
+      break;
+  }
+}

@@ -26,15 +26,39 @@ GameController::GameController(int* array):
 }
 
 int Reel::lot(int bet){
-  swich(bet){
-    case 1:
-      break;
-    case 2:
-      break;
-    case 3:
-      break;
-    default:
-      break;
+  bool big, reg, pierrot, bell, cherry, grape, replay;
+  int true_cnt = 0;
+
+  while(true_cnt != 1){
+    big = rand(big_probability[bet - 1]);
+    reg = rand(reg_probability[bet - 1]);
+    pierrot = rand(pierrot_probability[bet - 1]);
+    bell = rand(bell_probability[bet - 1]);
+    cherry = rand(cherry_probability[bet - 1]);
+    grape = rand(grape_probability[bet - 1]);
+    replay = rand(replay_probability[bet - 1]);
+
+    if(big == false && reg == false && pierrot == false && bell == false && cherry == false && grape == false && replay == false){
+      return LOSE;
+    }
+  }
+  
+  if(big){
+    return BIG;
+  }else if(reg){
+    return REG;
+  }else if(pierrot){
+    return PIERROT;
+  }else if(bell){
+    return BELL;
+  }else if(cherry){
+    return CHERRY;
+  }else if(grape){
+    return GRAPE;
+  }else if(replay){
+    return REPLAY;
+  }else{
+    //Error
   }
 }
 

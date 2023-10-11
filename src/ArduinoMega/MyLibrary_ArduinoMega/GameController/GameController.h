@@ -33,6 +33,17 @@ private:
     double grape_probability[] = {3.571, 8.00, 15.38};
     double replay_probability[] = {13.70, 13.70, 13.70};
 
+    enum{
+      LOSE = 0,
+      BIG = 1,
+      REG = 2,
+      PIERROT = 3,
+      BELL = 4,
+      CHERRY = 5,
+      GRAPE = 6,
+      REPLAY = 7
+    };
+
     int lot(int bet);
     bool rand(double percent);  //return 当選結果
     void rotateMotor();
@@ -40,7 +51,7 @@ private:
     Reel();
     int start();
   };
-  
+
 public:
   GameController(int* array);
 };

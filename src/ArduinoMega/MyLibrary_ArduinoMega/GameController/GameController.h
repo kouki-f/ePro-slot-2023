@@ -34,11 +34,11 @@ private:
     double replay_probability[] = {13.70, 13.70, 13.70};
 
     int lot(int bet);
-    bool rand(double percent);
+    bool rand(double percent);  //return 当選結果
     void rotateMotor();
   public:
     Reel();
-    int start();  // return 当選結果
+    int start();
   };
   
 public:

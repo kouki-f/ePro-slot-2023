@@ -25,7 +25,7 @@ GameController::GameController(int* array):
 {
 }
 
-Reel::lot(int bet){
+int Reel::lot(int bet){
   swich(bet){
     case 1:
       break;
@@ -36,4 +36,12 @@ Reel::lot(int bet){
     default:
       break;
   }
+}
+
+bool Reel::rand(double percent){
+  int rand_num = random(100000);
+  if(rand_num<percent*1000){
+    return true;
+  }
+  return false;
 }

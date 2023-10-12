@@ -32,24 +32,41 @@ private:
     double cherry_probability[] = {0.055, 1.50, 3.35};
     double grape_probability[] = {3.571, 8.00, 15.38};
     double replay_probability[] = {13.70, 13.70, 13.70};
+    int ND = -1;  //no_data
+    int seven_position[3][2] = {{10, 20}, {20, ND}, {20, ND}};  //リール番号
+    int bar_position[3][2] = {{4, 15}, {4, 12}, {19, ND}};
+    int pierrot_position[3][4] = {{9, ND, ND, ND}, {1, ND, ND, ND}, {3, 7, 11, 15}};
+    int bell_position[3][5] = {{21, ND, ND, ND, ND}, {8, 16, ND, ND, ND}, {2, 6, 10, 14, 18}};
+    int cherry_position[3][5] = {{5, 14, ND, ND, ND}, {2, 6, 10, 14, 18}, {ND, ND, ND, ND, ND}};
+    int grape_position[3][8] = {{1, 3, 6, 8, 11, 13, 16, 18}, {3, 7, 11, 15, 19, ND, ND, ND}, {4, 8, 12, 16, 21, ND, ND, ND}};
+    int replay_position[3][5] = {{2, 7, 12, 17, 19}, {5, 9, 13, 17, 21}, {1, 5, 9, 13, 17}};
+    double reel_result_position[3];  //角度
 
     enum{
       LOSE = 0,
       BIG = 1,
       REG = 2,
+      SEVEN = 1,
+      BAR = 2,
       PIERROT = 3,
       BELL = 4,
       CHERRY = 5,
       GRAPE = 6,
-      REPLAY = 7
+      REPLAY = 7,
+
+      BETWEEN_DEG = 17.142
     };
 
     int lot(int bet);
     bool rand(double percent);  //return 当選結果
+    void reelPosition(int result, double now_position);  //now_position is Deg
+    double getNearPosition(int reel_num, int pattern, double now_position);
+    void setReelResultPosition(int result, double now_position);
+    int searchNearNum(int reel_num, double now_position);
     void rotateMotor();
   public:
     Reel();
-    int start();
+    void start(int bet);
   };
 
 public:

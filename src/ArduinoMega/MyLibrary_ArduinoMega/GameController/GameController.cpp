@@ -69,3 +69,96 @@ bool Reel::rand(double percent){
   }
   return false;
 }
+
+void Reel::reelPosition(int result, double now_position){
+  switch(result){
+    case LOSE:
+      break;
+    case SEVEN:
+      setReelResultPosition(SEVEN, now_position);
+      break;
+    case BAR:
+      break;
+    case PIERROT:
+      break;
+    case BELL:
+      break;
+    case CHERRY:
+      break;
+    case GRAPE:
+      break;
+    case REPLAY:
+      break;
+    default
+      break;
+  }
+}
+
+double Reel::getNearPosition(int reel_num, int pattern, double now_position){  //now_position is Deg
+  double now_posi_num = now_position / BETWEEN_DEG;
+  int near_num = 100; int for_i;
+  switch(pattern){
+    case LOSE:
+      //はずれの時の関数
+      break;
+    case SEVEN:
+      for_i = 2;
+      //現在位置から原点までにその柄があるとき
+      for(int i=0;i<for_i;i++){
+        if(seven_position[reel_num][i] > 0 && seven_position[reel_num][i] > now_posi_num){  //not ND & now < newPosi
+          if(near_num > (seven_position[reel_num][i] - now_posi_num)){
+            near_num = seven_position[reel_num][i];
+          }
+        }
+      }
+      if(near_num != 100){
+        break;
+      }
+      //現在位置から原点までにその柄がないとき
+      double min_deg = 1000.0;
+      for(int i=0;i<for_i;i++){
+        if(seven_position[reel_num][i] > 0){
+          if(min_deg > seven_position[reel_num][i] + now_posi_num){
+            min_deg = seven_position[reel_num][i] + now_posi_num;
+            near_num = seven_position[reel_num][i];
+          }
+        }
+      }
+      near_num += 21;
+      break;
+    case BAR:
+      for_i = 2;
+      break;
+    case PIERROT:
+      for_i = 4;
+      break;
+    case BELL:
+      for_i = 5;
+      break;
+    case CHERRY:
+      for_i = 5;
+      break;
+    case GRAPE:
+      for_i = 8;
+      break;
+    case REPLAY:
+      for_i = 5;
+      break;
+    default
+      break;
+  }
+  return (near_num - now_posi_num) * BETWEEN_DEG;
+}
+
+int Reel::searchNearNum()
+
+void Reel::setReelResultPosition(int result, double now_position)[
+  for(int i=0;i<3;i++){
+    reel_result_position[i] = getNearPosition(i+1, result, now_position);
+  }
+]
+
+void Reel::start(int bet){
+  int result = lot(bet);
+  reelPosition(result);
+}

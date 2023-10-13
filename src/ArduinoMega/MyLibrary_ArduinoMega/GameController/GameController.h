@@ -22,6 +22,7 @@ private:
   Photointerrupter      motorPhoto1, motorPhoto2, motorPhoto3;
   Hopper                hopper;
   ArduinoNanoLedTape    nanoLedTape, nanoMatrix; //仮
+  Reel                  reel;
 
   class Reel{
   private:
@@ -71,6 +72,9 @@ private:
     void start2Stop(int bet);
   };
 
+  void payOutCoins(int result, int bet);
+
 public:
   GameController(int* array);
+  void lotting(int bet);
 };

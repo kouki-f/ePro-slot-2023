@@ -26,8 +26,10 @@ int pinArray[] = {
 GameController game(pinArray);
 
 void setup() {
+  Serial.begin(9600);
 }
 
 void loop() {
-
+  game.lotting(3);
+  delay(0.5);
 }

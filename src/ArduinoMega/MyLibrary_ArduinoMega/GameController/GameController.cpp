@@ -25,6 +25,10 @@ GameController::GameController(int* array):
 {
 }
 
+Reel::reel(){
+
+}
+
 int Reel::lot(int bet){
   bool big, reg, pierrot, bell, cherry, grape, replay;
   int true_cnt = 0;
@@ -205,3 +209,14 @@ void Reel::start2Stop(int bet){
     if(stopBN3_is_pushed == false) motor3.rotateAngle(1);
   }
 }
+
+void GameController::lotting(int bet){
+  reel.start2Stop(bet);
+  println(reel.slot_result);
+}
+
+// void GameController::payOutCoins(int result, int bet){
+//   swich(result){
+//     case
+//   }
+// }

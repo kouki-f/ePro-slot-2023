@@ -78,16 +78,22 @@ void Reel::reelPosition(int result, double now_position){
       setReelResultPosition(SEVEN, now_position);
       break;
     case BAR:
+      setReelResultPosition(BAR, now_position);
       break;
     case PIERROT:
+      setReelResultPosition(PIERROT, now_position);
       break;
     case BELL:
+      setReelResultPosition(BELL, now_position);
       break;
     case CHERRY:
+      setReelResultPosition(CHERRY, now_position);
       break;
     case GRAPE:
+      setReelResultPosition(GRAPE, now_position);
       break;
     case REPLAY:
+      setReelResultPosition(REPLAY, now_position);
       break;
     default
       break;
@@ -96,53 +102,38 @@ void Reel::reelPosition(int result, double now_position){
 
 double Reel::getNearPosition(int reel_num, int pattern, double now_position){  //now_position is Deg
   double now_posi_num = now_position / BETWEEN_DEG;
-  int near_num = 100; int for_i;
+  int near_num; int for_i;
   switch(pattern){
     case LOSE:
       //はずれの時の関数
       break;
     case SEVEN:
       for_i = 2;
-      //現在位置から原点までにその柄があるとき
-      for(int i=0;i<for_i;i++){
-        if(seven_position[reel_num][i] > 0 && seven_position[reel_num][i] > now_posi_num){  //not ND & now < newPosi
-          if(near_num > (seven_position[reel_num][i] - now_posi_num)){
-            near_num = seven_position[reel_num][i];
-          }
-        }
-      }
-      if(near_num != 100){
-        break;
-      }
-      //現在位置から原点までにその柄がないとき
-      double min_deg = 1000.0;
-      for(int i=0;i<for_i;i++){
-        if(seven_position[reel_num][i] > 0){
-          if(min_deg > seven_position[reel_num][i] + now_posi_num){
-            min_deg = seven_position[reel_num][i] + now_posi_num;
-            near_num = seven_position[reel_num][i];
-          }
-        }
-      }
-      near_num += 21;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     case BAR:
       for_i = 2;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     case PIERROT:
       for_i = 4;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     case BELL:
       for_i = 5;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     case CHERRY:
       for_i = 5;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     case GRAPE:
       for_i = 8;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     case REPLAY:
       for_i = 5;
+      near_num = searchNearNum(reel_num, now_position, for_i);
       break;
     default
       break;
@@ -150,15 +141,40 @@ double Reel::getNearPosition(int reel_num, int pattern, double now_position){  /
   return (near_num - now_posi_num) * BETWEEN_DEG;
 }
 
-int Reel::searchNearNum()
+int Reel::searchNearNum(int reel_num, double now_position, int for_i){
+  int near_num = 100;
+  //現在位置から原点までにその柄があるとき
+  for(int i=0;i<for_i;i++){
+    if(seven_position[reel_num][i] > 0 && seven_position[reel_num][i] > now_posi_num){  //not ND & now < newPosi
+      if(near_num > (seven_position[reel_num][i] - now_posi_num)){
+        near_num = seven_position[reel_num][i];
+      }
+    }
+  }
+  if(near_num != 100){
+    break;
+  }
+  //現在位置から原点までにその柄がないとき
+  double min_deg = 1000.0;
+  for(int i=0;i<for_i;i++){
+    if(seven_position[reel_num][i] > 0){
+      if(min_deg > seven_position[reel_num][i] + now_posi_num){
+        min_deg = seven_position[reel_num][i] + now_posi_num;
+        near_num = seven_position[reel_num][i];
+      }
+    }
+  }
+  near_num += 21;
+  return near_num;
+}
 
-void Reel::setReelResultPosition(int result, double now_position)[
+void Reel::setReelResultPosition(int result, double now_position){
   for(int i=0;i<3;i++){
     reel_result_position[i] = getNearPosition(i+1, result, now_position);
   }
-]
+}
 
 void Reel::start(int bet){
   int result = lot(bet);
-  reelPosition(result);
+  reelPosition(result);  //進めるべき角度をreel_result_positionにセット
 }

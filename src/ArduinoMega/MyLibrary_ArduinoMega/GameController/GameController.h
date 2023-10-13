@@ -62,7 +62,7 @@ private:
     void reelPosition(int result, double now_position);  //now_position is Deg
     double getNearPosition(int reel_num, int pattern, double now_position);
     void setReelResultPosition(int result, double now_position);
-    int searchNearNum(int reel_num, double now_position);
+    int searchNearNum(int reel_num, double now_position, int for_i);
     void rotateMotor();
   public:
     Reel();

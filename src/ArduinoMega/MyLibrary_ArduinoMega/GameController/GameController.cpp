@@ -174,7 +174,34 @@ void Reel::setReelResultPosition(int result, double now_position){
   }
 }
 
-void Reel::start(int bet){
-  int result = lot(bet);
-  reelPosition(result);  //進めるべき角度をreel_result_positionにセット
+void Reel::start2Stop(int bet){
+  slot_result = lot(bet);  //抽選結果をresultに代入
+  reelPosition(slot_result);  //進めるべき角度をreel_result_positionにセット
+  stopBN1.turnOn();
+  stopBN2.turnOn();
+  stopBN3.turnOn();
+
+  bool stopBN1_is_pushed = false;
+  bool stopBN2_is_pushed = false;
+  bool stopBN3_is_pushed = false;
+  while(stopBN1_is_pushed == false || stopBN2_is_pushed == false || stopBN3_is_pushed == false){
+    if(stopBN1.readButton() && stopBN1_is_pushed == false){
+      stopBN1.turnOff();  //BN-LED turn Off
+      motor1.rotateAngle(reel_result_position[0]);  //抽選結果の位置まで進める
+      stopBN1_is_pushed = true;
+    }
+    if(stopBN2.readButton() && stopBN2_is_pushed == false){
+      stopBN2.turnOff();
+      motor2.rotateAngle(reel_result_position[1]);
+      stopBN2_is_pushed = true;
+    }
+    if(stopBN3.readButton() && stopBN3_is_pushed == false){
+      stopBN3.turnOff();
+      motor3.rotateAngle(reel_result_position[2]);
+      stopBN3_is_pushed = true;
+    }
+    if(stopBN1_is_pushed == false) motor1.rotateAngle(1);
+    if(stopBN2_is_pushed == false) motor2.rotateAngle(1);
+    if(stopBN3_is_pushed == false) motor3.rotateAngle(1);
+  }
 }

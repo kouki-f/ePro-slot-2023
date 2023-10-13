@@ -65,8 +65,10 @@ private:
     int searchNearNum(int reel_num, double now_position, int for_i);
     void rotateMotor();
   public:
+    int slot_result;
+
     Reel();
-    void start(int bet);
+    void start2Stop(int bet);
   };
 
 public:

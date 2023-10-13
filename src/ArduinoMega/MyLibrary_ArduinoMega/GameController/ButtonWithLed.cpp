@@ -9,7 +9,7 @@ ButtonWithLed::ButtonWithLed(int bnPin, int ledPin){
 }
 
 bool ButtonWithLed::readButton(){
-  return !digitalRead(m_bnPin) == HIGH;  //PULL_UP => LOW is Push
+  return !digitalRead(m_bnPin) == HIGH;  //PULL_UP => LOW is Pushed
 }
 
 void ButtonWithLed::turnOn(){

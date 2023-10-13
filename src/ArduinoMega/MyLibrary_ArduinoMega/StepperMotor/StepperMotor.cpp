@@ -13,8 +13,8 @@ void StepperMotor::setSpeed(int speed){
   stepper.setSpeed(speed);
 }
 
-void StepperMotor::rotateAngle(int angle){
-  stepper.step(angle / (m_kangle_around_circle / m_karound_step));
+void StepperMotor::rotateAngle(double angle){
+  stepper.step((int)(angle / (m_kangle_around_circle / m_karound_step)));
 }
 
 void StepperMotor::step(int step){

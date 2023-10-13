@@ -22,17 +22,16 @@ private:
   Photointerrupter      motorPhoto1, motorPhoto2, motorPhoto3;
   Hopper                hopper;
   ArduinoNanoLedTape    nanoLedTape, nanoMatrix; //仮
-  Reel                  reel;
 
   class Reel{
   private:
-    double big_probability[] = {0.037, 0.083, 0.385};  //1枚掛け、２枚掛け、3枚掛け
-    double reg_probability[] = {0.037, 0.091, 0.333};
-    double pierrot_probability[] = {0.006, 0.040, 0.092};
-    double bell_probability[] = {0.006, 0.040, 0.092};
-    double cherry_probability[] = {0.055, 1.50, 3.35};
-    double grape_probability[] = {3.571, 8.00, 15.38};
-    double replay_probability[] = {13.70, 13.70, 13.70};
+    double big_probability[3] = {0.037, 0.083, 0.385};  //1枚掛け、２枚掛け、3枚掛け
+    double reg_probability[3] = {0.037, 0.091, 0.333};
+    double pierrot_probability[3] = {0.006, 0.040, 0.092};
+    double bell_probability[3] = {0.006, 0.040, 0.092};
+    double cherry_probability[3] = {0.055, 1.50, 3.35};
+    double grape_probability[3] = {3.571, 8.00, 15.38};
+    double replay_probability[3] = {13.70, 13.70, 13.70};
     int ND = -1;  //no_data
     int seven_position[3][2] = {{10, 20}, {20, ND}, {20, ND}};  //リール番号
     int bar_position[3][2] = {{4, 15}, {4, 12}, {19, ND}};
@@ -42,7 +41,9 @@ private:
     int grape_position[3][8] = {{1, 3, 6, 8, 11, 13, 16, 18}, {3, 7, 11, 15, 19, ND, ND, ND}, {4, 8, 12, 16, 21, ND, ND, ND}};
     int replay_position[3][5] = {{2, 7, 12, 17, 19}, {5, 9, 13, 17, 21}, {1, 5, 9, 13, 17}};
     double reel_result_position[3];  //角度
-
+    double now_posi_num;
+    double now_position;
+    const double BETWEEN_DEG = 17.142;
     enum{
       LOSE = 0,
       BIG = 1,
@@ -53,9 +54,7 @@ private:
       BELL = 4,
       CHERRY = 5,
       GRAPE = 6,
-      REPLAY = 7,
-
-      BETWEEN_DEG = 17.142
+      REPLAY = 7
     };
 
     int lot(int bet);
@@ -64,14 +63,13 @@ private:
     double getNearPosition(int reel_num, int pattern, double now_position);
     void setReelResultPosition(int result, double now_position);
     int searchNearNum(int reel_num, double now_position, int for_i);
-    void rotateMotor();
   public:
     int slot_result;
 
     Reel();
     void start2Stop(int bet);
   };
-
+  Reel reel;
   void payOutCoins(int result, int bet);
 
 public:

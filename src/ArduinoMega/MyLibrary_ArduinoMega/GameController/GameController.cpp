@@ -25,11 +25,11 @@ GameController::GameController(int* array):
 {
 }
 
-Reel::reel(){
+GameController::Reel::Reel(){
 
 }
 
-int Reel::lot(int bet){
+int GameController::Reel::lot(int bet){
   bool big, reg, pierrot, bell, cherry, grape, replay;
   int true_cnt = 0;
 
@@ -66,7 +66,7 @@ int Reel::lot(int bet){
   }
 }
 
-bool Reel::rand(double percent){
+bool GameController::Reel::rand(double percent){
   int rand_num = random(100000);
   if(rand_num<percent*1000){
     return true;
@@ -74,7 +74,7 @@ bool Reel::rand(double percent){
   return false;
 }
 
-void Reel::reelPosition(int result, double now_position){
+void GameController::Reel::reelPosition(int result, double now_position){
   switch(result){
     case LOSE:
       break;
@@ -99,13 +99,12 @@ void Reel::reelPosition(int result, double now_position){
     case REPLAY:
       setReelResultPosition(REPLAY, now_position);
       break;
-    default
+    default:
       break;
   }
 }
 
-double Reel::getNearPosition(int reel_num, int pattern, double now_position){  //now_position is Deg
-  double now_posi_num = now_position / BETWEEN_DEG;
+double GameController::Reel::getNearPosition(int reel_num, int pattern, double now_position){  //now_position is Deg
   int near_num; int for_i;
   switch(pattern){
     case LOSE:
@@ -139,13 +138,14 @@ double Reel::getNearPosition(int reel_num, int pattern, double now_position){  /
       for_i = 5;
       near_num = searchNearNum(reel_num, now_position, for_i);
       break;
-    default
+    default:
       break;
   }
   return (near_num - now_posi_num) * BETWEEN_DEG;
 }
 
-int Reel::searchNearNum(int reel_num, double now_position, int for_i){
+int GameController::Reel::searchNearNum(int reel_num, double now_position, int for_i){
+  now_posi_num = now_position / BETWEEN_DEG;
   int near_num = 100;
   //現在位置から原点までにその柄があるとき
   for(int i=0;i<for_i;i++){
@@ -155,32 +155,31 @@ int Reel::searchNearNum(int reel_num, double now_position, int for_i){
       }
     }
   }
-  if(near_num != 100){
-    break;
-  }
-  //現在位置から原点までにその柄がないとき
-  double min_deg = 1000.0;
-  for(int i=0;i<for_i;i++){
-    if(seven_position[reel_num][i] > 0){
-      if(min_deg > seven_position[reel_num][i] + now_posi_num){
-        min_deg = seven_position[reel_num][i] + now_posi_num;
-        near_num = seven_position[reel_num][i];
+  if(near_num == 100){
+    //現在位置から原点までにその柄がないとき
+    double min_deg = 1000.0;
+    for(int i=0;i<for_i;i++){
+      if(seven_position[reel_num][i] > 0){
+        if(min_deg > seven_position[reel_num][i] + now_posi_num){
+          min_deg = seven_position[reel_num][i] + now_posi_num;
+          near_num = seven_position[reel_num][i];
+        }
       }
     }
+    near_num += 21;
   }
-  near_num += 21;
   return near_num;
 }
 
-void Reel::setReelResultPosition(int result, double now_position){
+void GameController::Reel::setReelResultPosition(int result, double now_position){
   for(int i=0;i<3;i++){
     reel_result_position[i] = getNearPosition(i+1, result, now_position);
   }
 }
 
-void Reel::start2Stop(int bet){
+void GameController::Reel::start2Stop(int bet){
   slot_result = lot(bet);  //抽選結果をresultに代入
-  reelPosition(slot_result);  //進めるべき角度をreel_result_positionにセット
+  reelPosition(slot_result, now_position);  //進めるべき角度をreel_result_positionにセット
   stopBN1.turnOn();
   stopBN2.turnOn();
   stopBN3.turnOn();
@@ -212,11 +211,11 @@ void Reel::start2Stop(int bet){
 
 void GameController::lotting(int bet){
   reel.start2Stop(bet);
-  println(reel.slot_result);
+  Serial.println(reel.slot_result);
 }
 
-// void GameController::payOutCoins(int result, int bet){
-//   swich(result){
-//     case
-//   }
-// }
+void GameController::payOutCoins(int result, int bet){
+  // swich(result){
+  //   case
+  // }
+}

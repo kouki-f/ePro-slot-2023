@@ -25,6 +25,7 @@ private:
 
   class Reel{
   private:
+    GameController* gameController;
     double big_probability[3] = {0.037, 0.083, 0.385};  //1枚掛け、２枚掛け、3枚掛け
     double reg_probability[3] = {0.037, 0.091, 0.333};
     double pierrot_probability[3] = {0.006, 0.040, 0.092};
@@ -66,7 +67,7 @@ private:
   public:
     int slot_result;
 
-    Reel();
+    Reel(GameController* gameController);
     void start2Stop(int bet);
   };
   Reel reel;

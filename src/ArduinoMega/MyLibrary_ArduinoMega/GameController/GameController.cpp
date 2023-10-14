@@ -21,12 +21,13 @@ GameController::GameController(int* array):
   motorPhoto1(array[67]),
   motorPhoto2(array[68]),
   motorPhoto3(array[69]),
-  coinSelector(array[70])
+  coinSelector(array[70]),
+  reel(this)
 {
 }
 
-GameController::Reel::Reel(){
-
+GameController::Reel::Reel(GameController* gameController){
+  gameController = gameController;
 }
 
 int GameController::Reel::lot(int bet){
@@ -180,32 +181,32 @@ void GameController::Reel::setReelResultPosition(int result, double now_position
 void GameController::Reel::start2Stop(int bet){
   slot_result = lot(bet);  //抽選結果をresultに代入
   reelPosition(slot_result, now_position);  //進めるべき角度をreel_result_positionにセット
-  stopBN1.turnOn();
-  stopBN2.turnOn();
-  stopBN3.turnOn();
+  gameController->stopBN1.turnOn();
+  gameController->stopBN2.turnOn();
+  gameController->stopBN3.turnOn();
 
   bool stopBN1_is_pushed = false;
   bool stopBN2_is_pushed = false;
   bool stopBN3_is_pushed = false;
   while(stopBN1_is_pushed == false || stopBN2_is_pushed == false || stopBN3_is_pushed == false){
-    if(stopBN1.readButton() && stopBN1_is_pushed == false){
-      stopBN1.turnOff();  //BN-LED turn Off
-      motor1.rotateAngle(reel_result_position[0]);  //抽選結果の位置まで進める
+    if(gameController->stopBN1.readButton() && stopBN1_is_pushed == false){
+      gameController->stopBN1.turnOff();  //BN-LED turn Off
+      gameController->motor1.rotateAngle(reel_result_position[0]);  //抽選結果の位置まで進める
       stopBN1_is_pushed = true;
     }
-    if(stopBN2.readButton() && stopBN2_is_pushed == false){
-      stopBN2.turnOff();
-      motor2.rotateAngle(reel_result_position[1]);
+    if(gameController->stopBN2.readButton() && stopBN2_is_pushed == false){
+      gameController->stopBN2.turnOff();
+      gameController->motor2.rotateAngle(reel_result_position[1]);
       stopBN2_is_pushed = true;
     }
-    if(stopBN3.readButton() && stopBN3_is_pushed == false){
-      stopBN3.turnOff();
-      motor3.rotateAngle(reel_result_position[2]);
+    if(gameController->stopBN3.readButton() && stopBN3_is_pushed == false){
+      gameController->stopBN3.turnOff();
+      gameController->motor3.rotateAngle(reel_result_position[2]);
       stopBN3_is_pushed = true;
     }
-    if(stopBN1_is_pushed == false) motor1.rotateAngle(1);
-    if(stopBN2_is_pushed == false) motor2.rotateAngle(1);
-    if(stopBN3_is_pushed == false) motor3.rotateAngle(1);
+    if(stopBN1_is_pushed == false) gameController->motor1.rotateAngle(1);
+    if(stopBN2_is_pushed == false) gameController->motor2.rotateAngle(1);
+    if(stopBN3_is_pushed == false) gameController->motor3.rotateAngle(1);
   }
 }
 

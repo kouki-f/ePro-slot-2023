@@ -58,7 +58,7 @@ private:
       REPLAY = 7
     };
 
-    int lot(int bet);
+    //int lot(int bet);
     bool rand(double percent);  //return 当選結果
     void reelPosition(int result, double now_position);  //now_position is Deg
     double getNearPosition(int reel_num, int pattern, double now_position);
@@ -66,7 +66,7 @@ private:
     int searchNearNum(int reel_num, double now_position, int for_i);
   public:
     int slot_result;
-
+    int lot(int bet);
     Reel(GameController* gameController);
     void start2Stop(int bet);
   };
@@ -75,5 +75,4 @@ private:
 
 public:
   GameController(int* array);
-  void lotting(int bet);
 };

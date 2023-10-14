@@ -42,10 +42,15 @@ int GameController::Reel::lot(int bet){
     cherry = rand(cherry_probability[bet - 1]);
     grape = rand(grape_probability[bet - 1]);
     replay = rand(replay_probability[bet - 1]);
-
-    if(big == false && reg == false && pierrot == false && bell == false && cherry == false && grape == false && replay == false){
-      return LOSE;
-    }
+    if(big) true_cnt++;
+    if(reg) true_cnt++;
+    if(pierrot) true_cnt++;
+    if(bell) true_cnt++;
+    if(cherry) true_cnt++;
+    if(grape) true_cnt++;
+    if(replay) true_cnt++;
+    if(true_cnt == 0) return LOSE;
+    if(true_cnt > 1) true_cnt = 0;
   }
   
   if(big){
@@ -68,7 +73,7 @@ int GameController::Reel::lot(int bet){
 }
 
 bool GameController::Reel::rand(double percent){
-  int rand_num = random(100000);
+  long rand_num = random(0, 100000);
   if(rand_num<percent*1000){
     return true;
   }
@@ -208,11 +213,6 @@ void GameController::Reel::start2Stop(int bet){
     if(stopBN2_is_pushed == false) gameController->motor2.rotateAngle(1);
     if(stopBN3_is_pushed == false) gameController->motor3.rotateAngle(1);
   }
-}
-
-void GameController::lotting(int bet){
-  reel.start2Stop(bet);
-  Serial.println(reel.slot_result);
 }
 
 void GameController::payOutCoins(int result, int bet){

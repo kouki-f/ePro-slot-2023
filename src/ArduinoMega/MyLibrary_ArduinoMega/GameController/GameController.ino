@@ -30,6 +30,4 @@ void setup() {
 }
 
 void loop() {
-  game.lotting(3);
-  delay(0.5);
 }

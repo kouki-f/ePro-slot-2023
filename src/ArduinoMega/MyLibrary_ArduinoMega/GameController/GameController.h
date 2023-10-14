@@ -43,7 +43,7 @@ private:
     int replay_position[3][5] = {{2, 7, 12, 17, 19}, {5, 9, 13, 17, 21}, {1, 5, 9, 13, 17}};
     double reel_result_position[3];  //角度
     double now_posi_num;
-    double now_position;
+    double now_position[3] = {0, 0, 0};  //Deg
     const double BETWEEN_DEG = 17.142;
     enum{
       LOSE = 0,
@@ -58,17 +58,17 @@ private:
       REPLAY = 7
     };
 
-    //int lot(int bet);
+    int lot(int bet);
     bool rand(double percent);  //return 当選結果
-    void reelPosition(int result, double now_position);  //now_position is Deg
-    double getNearPosition(int reel_num, int pattern, double now_position);
-    void setReelResultPosition(int result, double now_position);
-    int searchNearNum(int reel_num, double now_position, int for_i);
+    void reelPosition(int result);
+    double getNearPosition(int reel_num, int pattern);
+    void setReelResultPosition(int result);
+    int searchNearNum(int reel_num, int for_i);
   public:
     int slot_result;
-    int lot(int bet);
     Reel(GameController* gameController);
     void start2Stop(int bet);
+    void rotate1Step(int reel_num);
   };
 
   enum{
@@ -83,9 +83,13 @@ private:
       GRAPE = 6,
       REPLAY = 7
   };
-  Reel reel;
-  void payOutCoins(int result, int bet);
 
+  Reel reel;
+  int bet = 1;
+  void payOutCoins(int result, int bet);
+  void launch();  //起動音など
+  void waitForPushedStartBN();
 public:
   GameController(int* array);
+  void start();  //システムのメイン関数
 };

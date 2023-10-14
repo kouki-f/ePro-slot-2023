@@ -80,37 +80,37 @@ bool GameController::Reel::rand(double percent){
   return false;
 }
 
-void GameController::Reel::reelPosition(int result, double now_position){
+void GameController::Reel::reelPosition(int result){
   switch(result){
     case LOSE:
       break;
     case SEVEN:
-      setReelResultPosition(SEVEN, now_position);
+      setReelResultPosition(SEVEN);
       break;
     case BAR:
-      setReelResultPosition(BAR, now_position);
+      setReelResultPosition(BAR);
       break;
     case PIERROT:
-      setReelResultPosition(PIERROT, now_position);
+      setReelResultPosition(PIERROT);
       break;
     case BELL:
-      setReelResultPosition(BELL, now_position);
+      setReelResultPosition(BELL);
       break;
     case CHERRY:
-      setReelResultPosition(CHERRY, now_position);
+      setReelResultPosition(CHERRY);
       break;
     case GRAPE:
-      setReelResultPosition(GRAPE, now_position);
+      setReelResultPosition(GRAPE);
       break;
     case REPLAY:
-      setReelResultPosition(REPLAY, now_position);
+      setReelResultPosition(REPLAY);
       break;
     default:
       break;
   }
 }
 
-double GameController::Reel::getNearPosition(int reel_num, int pattern, double now_position){  //now_position is Deg
+double GameController::Reel::getNearPosition(int reel_num, int pattern){
   int near_num; int for_i;
   switch(pattern){
     case LOSE:
@@ -118,31 +118,31 @@ double GameController::Reel::getNearPosition(int reel_num, int pattern, double n
       break;
     case SEVEN:
       for_i = 2;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     case BAR:
       for_i = 2;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     case PIERROT:
       for_i = 4;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     case BELL:
       for_i = 5;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     case CHERRY:
       for_i = 5;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     case GRAPE:
       for_i = 8;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     case REPLAY:
       for_i = 5;
-      near_num = searchNearNum(reel_num, now_position, for_i);
+      near_num = searchNearNum(reel_num, for_i);
       break;
     default:
       break;
@@ -150,8 +150,8 @@ double GameController::Reel::getNearPosition(int reel_num, int pattern, double n
   return (near_num - now_posi_num) * BETWEEN_DEG;
 }
 
-int GameController::Reel::searchNearNum(int reel_num, double now_position, int for_i){
-  now_posi_num = now_position / BETWEEN_DEG;
+int GameController::Reel::searchNearNum(int reel_num, int for_i){
+  now_posi_num = now_position[reel_num - 1] / BETWEEN_DEG;
   int near_num = 100;
   //現在位置から原点までにその柄があるとき
   for(int i=0;i<for_i;i++){
@@ -177,15 +177,15 @@ int GameController::Reel::searchNearNum(int reel_num, double now_position, int f
   return near_num;
 }
 
-void GameController::Reel::setReelResultPosition(int result, double now_position){
+void GameController::Reel::setReelResultPosition(int result){
   for(int i=0;i<3;i++){
-    reel_result_position[i] = getNearPosition(i+1, result, now_position);
+    reel_result_position[i] = getNearPosition(i+1, result);
   }
 }
 
 void GameController::Reel::start2Stop(int bet){
   slot_result = lot(bet);  //抽選結果をresultに代入
-  reelPosition(slot_result, now_position);  //進めるべき角度をreel_result_positionにセット
+  reelPosition(slot_result);  //進めるべき角度をreel_result_positionにセット
   gameController->stopBN1.turnOn();
   gameController->stopBN2.turnOn();
   gameController->stopBN3.turnOn();
@@ -193,25 +193,67 @@ void GameController::Reel::start2Stop(int bet){
   bool stopBN1_is_pushed = false;
   bool stopBN2_is_pushed = false;
   bool stopBN3_is_pushed = false;
+
   while(stopBN1_is_pushed == false || stopBN2_is_pushed == false || stopBN3_is_pushed == false){
+    if(stopBN1_is_pushed == false) rotate1Step(1);  //stopBNが押されるまで回転し続ける
+    if(stopBN2_is_pushed == false) rotate1Step(2);
+    if(stopBN2_is_pushed == false) rotate1Step(3);
+
     if(gameController->stopBN1.readButton() && stopBN1_is_pushed == false){
       gameController->stopBN1.turnOff();  //BN-LED turn Off
-      gameController->motor1.rotateAngle(reel_result_position[0]);  //抽選結果の位置まで進める
+      for(int i=0;i<(int)(reel_result_position[0]/1.8);i++){  //柄まで進める
+        rotate1Step(1);
+      }
       stopBN1_is_pushed = true;
     }
     if(gameController->stopBN2.readButton() && stopBN2_is_pushed == false){
       gameController->stopBN2.turnOff();
-      gameController->motor2.rotateAngle(reel_result_position[1]);
+      for(int i=0;i<(int)(reel_result_position[1]/1.8);i++){
+        rotate1Step(2);
+      }
       stopBN2_is_pushed = true;
     }
     if(gameController->stopBN3.readButton() && stopBN3_is_pushed == false){
       gameController->stopBN3.turnOff();
-      gameController->motor3.rotateAngle(reel_result_position[2]);
+      for(int i=0;i<(int)(reel_result_position[2]/1.8);i++){
+        rotate1Step(3);
+      }
       stopBN3_is_pushed = true;
     }
-    if(stopBN1_is_pushed == false) gameController->motor1.rotateAngle(1);
-    if(stopBN2_is_pushed == false) gameController->motor2.rotateAngle(1);
-    if(stopBN3_is_pushed == false) gameController->motor3.rotateAngle(1);
+  }
+}
+
+void GameController::Reel::rotate1Step(int reel_num){
+  switch(reel_num){
+    case 1:
+      if(gameController->motorPhoto1.readPhoto()){
+        now_position[0] = 1.8;
+        gameController->motor1.step(1);
+      }else{
+        gameController->motor1.step(1);
+        now_position[0] += 1.8;
+      }
+      break;
+    case 2:
+      if(gameController->motorPhoto2.readPhoto()){
+        now_position[1] = 1.8;
+        gameController->motor2.step(1);
+      }else{
+        gameController->motor2.step(1);
+        now_position[0] += 1.8;
+      }
+      break;
+    case 3:
+      if(gameController->motorPhoto3.readPhoto()){
+        now_position[2] = 1.8;
+        gameController->motor3.step(1);
+      }else{
+        gameController->motor3.step(1);
+        now_position[0] += 1.8;
+      }
+      break;
+    default:
+      break;
   }
 }
 
@@ -243,5 +285,54 @@ void GameController::payOutCoins(int result, int bet){
       break;
     default:
       break;
+  }
+}
+
+void GameController::launch(){
+  while(motorPhoto1.readPhoto() == false){  //初期位置
+    reel.rotate1Step(1);
+  }
+  while(motorPhoto2.readPhoto() == false){
+    reel.rotate1Step(2);
+  }
+  while(motorPhoto3.readPhoto() == false){
+    reel.rotate1Step(3);
+  }
+}
+
+void GameController::waitForPushedStartBN(){
+  bool canStart = false;
+  while(startBN.readButton() == false || canStart == false){  //startBNが押されるまで待つ bet設定など可能
+    if(coinSelector.nowPlayerCoinCount() >= bet){  //BET枚数と所有枚数の比較
+      canStart = true;
+      startBN.turnOn();  //もしstartできる状態ならstartBNを点灯する
+    }else{
+      canStart = false;
+      startBN.turnOff();
+    }
+
+    if(betBN.readButton()){  //BET額を設定
+      if(bet == 3){
+        bet = 1;
+      }else{
+        bet++;
+      }
+    }
+
+    if(payBN.readButton()){  //pay outボタン
+      int have_coins = coinSelector.nowPlayerCoinCount();
+      hopper.payOutCoin(have_coins);
+      coinSelector.updatePlayerCoinCount(have_coins);
+    }
+  }
+  coinSelector.updatePlayerCoinCount(bet);
+}
+
+void GameController::start(){
+  launch();  //起動時の動作
+  while(true){  //メインループ
+    waitForPushedStartBN();  //startBNが押されるまで待機 BET設定、pay out可能
+    reel.start2Stop(bet);
+    payOutCoins(reel.slot_result, bet);
   }
 }

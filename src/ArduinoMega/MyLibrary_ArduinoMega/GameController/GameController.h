@@ -70,6 +70,19 @@ private:
     Reel(GameController* gameController);
     void start2Stop(int bet);
   };
+
+  enum{
+      LOSE = 0,
+      BIG = 1,
+      REG = 2,
+      SEVEN = 1,
+      BAR = 2,
+      PIERROT = 3,
+      BELL = 4,
+      CHERRY = 5,
+      GRAPE = 6,
+      REPLAY = 7
+  };
   Reel reel;
   void payOutCoins(int result, int bet);
 

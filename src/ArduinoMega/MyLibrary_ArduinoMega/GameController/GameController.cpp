@@ -216,7 +216,32 @@ void GameController::Reel::start2Stop(int bet){
 }
 
 void GameController::payOutCoins(int result, int bet){
-  // swich(result){
-  //   case
-  // }
+  switch(result){
+    case PIERROT:
+      if(bet == 1){
+        hopper.payOutCoin(10);
+      }else{
+        hopper.payOutCoin(14);
+      }
+      break;
+    case BELL:
+      hopper.payOutCoin(14);
+      break;
+    case CHERRY:
+      if(bet == 1){
+        hopper.payOutCoin(1);
+      }else{
+        hopper.payOutCoin(14);
+      }
+      break;
+    case GRAPE:
+      if(bet == 1){
+        hopper.payOutCoin(7);
+      }else{
+        hopper.payOutCoin(14);
+      }
+      break;
+    default:
+      break;
+  }
 }

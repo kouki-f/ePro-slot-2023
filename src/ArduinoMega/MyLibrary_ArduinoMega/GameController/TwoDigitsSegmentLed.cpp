@@ -28,7 +28,7 @@ TwoDigitsSegmentLed::TwoDigitsSegmentLed(int pinA1, int pinB1, int pinC1,
   pinMode(m_pinG2, OUTPUT);
 }
 
-void TwoDigitsSegmentLed::DisplayNumber(int n){
+static void TwoDigitsSegmentLed::displayNumber(int n){
   m_num = n;
   m_ones = GetOnesPlace(m_num);
   m_tens = GetTensPlace(m_num);

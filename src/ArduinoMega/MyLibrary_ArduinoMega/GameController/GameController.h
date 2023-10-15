@@ -90,6 +90,7 @@ private:
 
   Reel reel;
   int bet = 1;
+  int m_payout_coin_cnt;
   void payOutCoins(int result, int bet);
   void launch();  //起動音など
   void waitForPushedStartBN();

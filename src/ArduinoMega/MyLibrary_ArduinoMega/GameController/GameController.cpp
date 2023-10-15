@@ -21,7 +21,7 @@ GameController::GameController(int* array):
   motorPhoto1(array[67]),
   motorPhoto2(array[68]),
   motorPhoto3(array[69]),
-  coinSelector(array[70]),
+  coinSelector(array[70], this),
   reel(this)
 {
 }
@@ -260,32 +260,23 @@ void GameController::Reel::rotate1Step(int reel_num){
 void GameController::payOutCoins(int result, int bet){
   switch(result){
     case PIERROT:
-      if(bet == 1){
-        hopper.payOutCoin(10);
-      }else{
-        hopper.payOutCoin(14);
-      }
+      bet == 1 ? m_payout_coin_cnt = 10 : m_payout_coin_cnt = 14;
       break;
     case BELL:
-      hopper.payOutCoin(14);
+      m_payout_coin_cnt = 14;
       break;
     case CHERRY:
-      if(bet == 1){
-        hopper.payOutCoin(1);
-      }else{
-        hopper.payOutCoin(14);
-      }
+      bet == 1 ? m_payout_coin_cnt = 1 : m_payout_coin_cnt = 14;
       break;
     case GRAPE:
-      if(bet == 1){
-        hopper.payOutCoin(7);
-      }else{
-        hopper.payOutCoin(14);
-      }
+      bet == 1 ? m_payout_coin_cnt = 7 : m_payout_coin_cnt = 14;
       break;
     default:
+      m_payout_coin_cnt = 0;
       break;
   }
+  showNum(PAYOUT7SEG, m_payout_coin_cnt);
+  hopper.payOutCoin(m_payout_coin_cnt);
 }
 
 void GameController::launch(){
@@ -317,6 +308,7 @@ void GameController::waitForPushedStartBN(){
       }else{
         bet++;
       }
+      showNum(BET7SEG, bet);
     }
 
     if(payBN.readButton()){  //pay outボタン
@@ -325,7 +317,8 @@ void GameController::waitForPushedStartBN(){
       coinSelector.updatePlayerCoinCount(have_coins);
     }
   }
-  coinSelector.updatePlayerCoinCount(bet);
+  showNum(PAYOUT7SEG, 0);
+  coinSelector.updatePlayerCoinCount(bet);  //BET枚数分player coinを減らす
 }
 
 void GameController::showNum(int digit, int num){

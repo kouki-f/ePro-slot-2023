@@ -303,11 +303,7 @@ void GameController::waitForPushedStartBN(){
     }
 
     if(betBN.readButton()){  //BET額を設定
-      if(bet == 3){
-        bet = 1;
-      }else{
-        bet++;
-      }
+      bet == 3 ? bet = 1 : bet ++;
       showNum(BET7SEG, bet);
     }
 

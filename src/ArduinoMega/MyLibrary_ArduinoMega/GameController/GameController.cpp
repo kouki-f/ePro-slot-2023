@@ -328,8 +328,25 @@ void GameController::waitForPushedStartBN(){
   coinSelector.updatePlayerCoinCount(bet);
 }
 
+void GameController::showNum(int digit, int num){
+  switch(digit){
+    case BET7SEG:
+      oneDigitSeg.displayNumber(num);
+      break;
+    case PLAYERCOIN7SEG:
+      twoDigitsSeg.displayNumber(num);
+      break;
+    case PAYOUT7SEG:
+      threeDigitsSeg.displayNumber(num);
+      break;
+    default:
+      break;
+  }
+}
+
 void GameController::start(){
   launch();  //起動時の動作
+
   while(true){  //メインループ
     waitForPushedStartBN();  //startBNが押されるまで待機 BET設定、pay out可能
     reel.start2Stop(bet);

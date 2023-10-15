@@ -81,7 +81,11 @@ private:
       BELL = 4,
       CHERRY = 5,
       GRAPE = 6,
-      REPLAY = 7
+      REPLAY = 7,
+
+      BET7SEG = 1,
+      PLAYERCOIN7SEG = 2,
+      PAYOUT7SEG = 3
   };
 
   Reel reel;
@@ -89,6 +93,7 @@ private:
   void payOutCoins(int result, int bet);
   void launch();  //起動音など
   void waitForPushedStartBN();
+  void showNum(int digit, int num);
 public:
   GameController(int* array);
   void start();  //システムのメイン関数

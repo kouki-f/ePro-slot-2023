@@ -25,6 +25,6 @@ class ThreeDigitsSegmentLed{
     void SegDelay();
   public:
     ThreeDigitsSegmentLed(int pinA, int pinB, int pinC, int pinD, int pinE, int pinF, int pinG, int pin1, int pin2, int pin3);
-    void DisplayNumber(int n);
+    void displayNumber(int n);
     void turnOffAllLed();
 };

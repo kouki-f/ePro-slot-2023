@@ -17,7 +17,7 @@ ThreeDigitsSegmentLed::ThreeDigitsSegmentLed(int pinA, int pinB, int pinC, int p
   pinMode(m_pin3, OUTPUT);
 }
 
-void ThreeDigitsSegmentLed::DisplayNumber(int n){  //ループ無し
+void ThreeDigitsSegmentLed::displayNumber(int n){  //ループ無し
   m_num = n;
   m_hundred_num = GetHundredPlace(m_num);
   m_ten_num = GetTensPlace(m_num);

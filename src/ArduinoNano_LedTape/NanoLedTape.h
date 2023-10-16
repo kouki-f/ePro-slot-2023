@@ -7,9 +7,9 @@ private:
   const int m_kLED_COUNT = 60; // LEDの数
 
   enum{
-    WAIT_FOR_START,
-    WIN,
-    COIN_INSERTED
+    WAIT_FOR_START=0,
+    WIN=1,
+    COIN_INSERTED=2
   }
 public:
   NanoLedTape();

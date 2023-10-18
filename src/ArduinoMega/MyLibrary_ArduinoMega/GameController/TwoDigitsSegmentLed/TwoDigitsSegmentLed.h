@@ -34,7 +34,8 @@ class TwoDigitsSegmentLed{
                         int pinD1, int pinE1, int pinF1,
                         int pinG1, int pinA2, int pinB2,
                         int pinC2, int pinD2, int pinE2,
-                        int pinF2, int pinG2);
+                        int pinF2, int pinG2
+                        );
 
     static void displayNumber(int n);
     static void turnOffAllLed();

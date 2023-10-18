@@ -1,16 +1,23 @@
 #include "TwoDigitsSegmentLed.h"
 #include <Arduino.h>
-
 TwoDigitsSegmentLed::TwoDigitsSegmentLed(int pinA1, int pinB1, int pinC1,
                       int pinD1, int pinE1, int pinF1,
                       int pinG1, int pinA2, int pinB2,
                       int pinC2, int pinD2, int pinE2,
-                      int pinF2, int pinG2){
+                      int pinF2, int pinG2
+                      ){
 
   m_pinA1 = pinA1; m_pinB1= pinB1; m_pinC1 = pinC1;
   m_pinD1 = pinD1; m_pinE1 = pinE1; m_pinF1 = pinF1;m_pinG1 = pinG1;
   m_pinA2 = pinA2; m_pinB2= pinB2; m_pinC2 = pinC2;
   m_pinD2 = pinD2; m_pinE2 = pinE2; m_pinF2 = pinF2;m_pinG2 = pinG2;
+
+  m_pinA1 = A0; m_pinB1 = A1; m_pinC1 = A2;
+  m_pinD1 = A3; m_pinE1 = A4; m_pinF1 = A5;
+  m_pinG1 = A6;
+  m_pinA2 = A7; m_pinB2 = A8; m_pinC2 = A9;
+  m_pinD2 = A10; m_pinE2 = A11; m_pinF2 = A12;
+  m_pinG2 = A13;
 
   pinMode(m_pinA1, OUTPUT);
   pinMode(m_pinB1, OUTPUT);
@@ -28,17 +35,17 @@ TwoDigitsSegmentLed::TwoDigitsSegmentLed(int pinA1, int pinB1, int pinC1,
   pinMode(m_pinG2, OUTPUT);
 }
 
-static void TwoDigitsSegmentLed::displayNumber(int n){
+void TwoDigitsSegmentLed::displayNumber(int n){
   m_num = n;
   m_ones = GetOnesPlace(m_num);
   m_tens = GetTensPlace(m_num);
 
-  turnOffAllLed();  
+  turnOffAllLed();
   displayOnesPlace(m_ones);
   displayTensPlace(m_tens);
 }
 
-static void TwoDigitsSegmentLed::displayOnesPlace(int ones){
+void TwoDigitsSegmentLed::displayOnesPlace(int ones){
   switch (ones)
   {
   case 0:
@@ -76,7 +83,7 @@ static void TwoDigitsSegmentLed::displayOnesPlace(int ones){
   }
 }
 
-static void TwoDigitsSegmentLed::displayTensPlace(int tens){
+void TwoDigitsSegmentLed::displayTensPlace(int tens){
   switch (tens)
   {
   case 0:
@@ -114,23 +121,23 @@ static void TwoDigitsSegmentLed::displayTensPlace(int tens){
   }
 }
 
-static int TwoDigitsSegmentLed::GetOnesPlace(int n){
+int TwoDigitsSegmentLed::GetOnesPlace(int n){
   return n % 10;
 }
 
-static int TwoDigitsSegmentLed::GetTensPlace(int n){
+int TwoDigitsSegmentLed::GetTensPlace(int n){
   return n / 10;
 }
 
-static void TwoDigitsSegmentLed::setHIGH(int pin){
+void TwoDigitsSegmentLed::setHIGH(int pin){
   digitalWrite(pin, HIGH);
 }
 
-static void TwoDigitsSegmentLed::setLOW(int pin){
+void TwoDigitsSegmentLed::setLOW(int pin){
   digitalWrite(pin, LOW);
 }
 
-static void TwoDigitsSegmentLed::displayZero(int place){  
+void TwoDigitsSegmentLed::displayZero(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinB1);
@@ -148,7 +155,7 @@ static void TwoDigitsSegmentLed::displayZero(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayOne(int place){
+void TwoDigitsSegmentLed::displayOne(int place){
   if(place == 1){
     setHIGH(m_pinB1);
     setHIGH(m_pinC1);
@@ -158,7 +165,7 @@ static void TwoDigitsSegmentLed::displayOne(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayTwo(int place){
+void TwoDigitsSegmentLed::displayTwo(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinB1);
@@ -174,7 +181,7 @@ static void TwoDigitsSegmentLed::displayTwo(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayThree(int place){
+void TwoDigitsSegmentLed::displayThree(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinB1);
@@ -190,7 +197,7 @@ static void TwoDigitsSegmentLed::displayThree(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayFour(int place){
+void TwoDigitsSegmentLed::displayFour(int place){
   if(place == 1){
     setHIGH(m_pinF1);
     setHIGH(m_pinG1);
@@ -204,7 +211,7 @@ static void TwoDigitsSegmentLed::displayFour(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayFive(int place){
+void TwoDigitsSegmentLed::displayFive(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinF1);
@@ -220,7 +227,7 @@ static void TwoDigitsSegmentLed::displayFive(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displaySix(int place){
+void TwoDigitsSegmentLed::displaySix(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinF1);
@@ -238,7 +245,7 @@ static void TwoDigitsSegmentLed::displaySix(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displaySeven(int place){
+void TwoDigitsSegmentLed::displaySeven(int place){
   if(place == 1){
     setHIGH(m_pinF1);
     setHIGH(m_pinA1);
@@ -252,7 +259,7 @@ static void TwoDigitsSegmentLed::displaySeven(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayEight(int place){
+void TwoDigitsSegmentLed::displayEight(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinB1);
@@ -272,7 +279,7 @@ static void TwoDigitsSegmentLed::displayEight(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::displayNine(int place){
+void TwoDigitsSegmentLed::displayNine(int place){
   if(place == 1){
     setHIGH(m_pinA1);
     setHIGH(m_pinF1);
@@ -288,7 +295,7 @@ static void TwoDigitsSegmentLed::displayNine(int place){
   }
 }
 
-static void TwoDigitsSegmentLed::turnOffAllLed(){
+void TwoDigitsSegmentLed::turnOffAllLed(){
   setLOW(m_pinA1);
   setLOW(m_pinB1);
   setLOW(m_pinC1);

@@ -1,7 +1,8 @@
 #pragma once
+
 #include "StepperMotor.h"
 #include "OneDigitSegmentLed.h"
-#include "TwoDigitsSegmentLed.h"
+//#include "TwoDigitsSegmentLed.h"
 #include "SoundEffect.h"
 #include "ButtonWithLed.h"
 #include "CoinSelector.h"
@@ -9,12 +10,11 @@
 #include "Hopper.h"
 #include "ArduinoNanoLedTape.h"
 #include "ThreeDigitsSegmentLed.h"
-
 class GameController{
 private:
   StepperMotor          motor1, motor2, motor3;
   OneDigitSegmentLed    oneDigitSeg;
-  TwoDigitsSegmentLed   twoDigitsSeg;
+  //TwoDigitsSegmentLed   twoDigitsSeg;
   ThreeDigitsSegmentLed threeDigitsSeg;
   SoundEffect           soundEffect;
   ButtonWithLed         startBN, stopBN1, stopBN2, stopBN3, betBN, payBN;

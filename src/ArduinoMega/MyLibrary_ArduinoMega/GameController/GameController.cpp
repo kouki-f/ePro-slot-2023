@@ -116,34 +116,35 @@ double GameController::Reel::getNearPosition(int reel_num, int pattern){
   switch(pattern){
     case LOSE:
       //はずれの時の関数
+      near_num = searchNearNum(reel_num, 0, pattern);
       break;
     case SEVEN:
       for_i = 2;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     case BAR:
       for_i = 2;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     case PIERROT:
       for_i = 4;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     case BELL:
       for_i = 5;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     case CHERRY:
       for_i = 5;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     case GRAPE:
       for_i = 8;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     case REPLAY:
       for_i = 5;
-      near_num = searchNearNum(reel_num, for_i);
+      near_num = searchNearNum(reel_num, for_i, pattern);
       break;
     default:
       break;
@@ -151,9 +152,14 @@ double GameController::Reel::getNearPosition(int reel_num, int pattern){
   return (near_num - now_posi_num) * BETWEEN_DEG;
 }
 
-int GameController::Reel::searchNearNum(int reel_num, int for_i){
+int GameController::Reel::searchNearNum(int reel_num, int for_i, int result){
   now_posi_num = now_position[reel_num - 1] / BETWEEN_DEG;
   int near_num = 100;
+
+  if(result == LOSE){
+    
+  }
+
   //現在位置から原点までにその柄があるとき
   for(int i=0;i<for_i;i++){
     if(seven_position[reel_num][i] > 0 && seven_position[reel_num][i] > now_posi_num){  //not ND & now < newPosi

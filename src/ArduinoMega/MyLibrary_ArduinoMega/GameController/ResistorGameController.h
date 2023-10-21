@@ -75,7 +75,6 @@ private:
     int slot_result;
     Reel(ResistorGameController* gameController);
     void start2Stop();
-    void start2StopDark();
     void rotate10Step(int reel_num);
   };
 
@@ -101,10 +100,12 @@ private:
   int m_payout_coin_cnt;
   void payOutCoins();
   void launch();  //起動音など
+  void launchDark();
   void waitForPushedStartBN();
+  void waitForPushedStartBNDark();
   void showNum(int digit, int num);
 public:
   ResistorGameController(int* array);
-  void startLightSide();  //システムのメイン関数
-  void startDarkSide();
+  void startLightMode();  //システムのメイン関数
+  void startDarkMode();
 };

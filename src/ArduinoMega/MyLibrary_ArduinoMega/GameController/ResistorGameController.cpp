@@ -108,8 +108,30 @@ void ResistorGameController::Reel::start2Stop(){
   }
 }
 
-void ResistorGameController::Reel::start2StopDark(){
-  
+void ResistorGameController::waitForPushedStartBNDark(){
+  bool canStart = false;
+  while(startBN.readButton() == false || canStart == false){  //startBNが押されるまで待つ bet設定など可能
+    if(coinSelector.nowPlayerCoinCount() >= bet){  //BET枚数と所有枚数の比較
+      canStart = true;
+      startBN.turnOn();  //もしstartできる状態ならstartBNを点灯する
+    }else{
+      canStart = false;
+      startBN.turnOff();
+    }
+
+    if(betBN.readButton()){  //BET額を設定
+      bet == 3 ? bet = 1 : bet ++;
+      showNum(BET7SEG, bet);
+    }
+
+    if(payBN.readButton()){  //pay outボタン
+      int have_coins = coinSelector.nowPlayerCoinCount();
+      hopper.payOutCoin(have_coins);
+      coinSelector.updatePlayerCoinCount(have_coins);
+    }
+  }
+  showNum(PAYOUT7SEG, 0);
+  coinSelector.updatePlayerCoinCount(bet);  //BET枚数分player coinを減らす
 }
 
 void ResistorGameController::Reel::rotate10Step(int reel_num){
@@ -150,13 +172,44 @@ void ResistorGameController::payOutCoins(){
   for(int i=0;i<3;i++){
     reel.now_step_position[i] %= 200;
   }
-  m_payout_coin_cnt = (reel.left_reel[reel.now_step_position[0] / 10] * 10 + reel.center_reel[reel.now_step_position[1] / 10]) / 20
-                      + reel.right_reel[reel.now_step_position[2] / 10] * reel.right_reel[reel.now_step_position[2] / 10] / 2;
+  int left_result = reel.left_reel[reel.now_step_position[0] / 10];
+  int center_result = reel.center_reel[reel.now_step_position[1] / 10];
+  int right_result = reel.right_reel[reel.now_step_position[2] / 10];
+
+  m_payout_coin_cnt = (left_result * 10 + center_result) / 20
+                      + right_result * right_result / 2;
   showNum(PAYOUT7SEG, m_payout_coin_cnt);
   hopper.payOutCoin(m_payout_coin_cnt);
 }
 
+void ResistorGameController::payOutCoinsDark(){
+  for(int i=0;i<3;i++){
+    reel.now_step_position[i] %= 200;
+  }
+  int left_result = reel.left_reel[reel.now_step_position[0] / 10];
+  int center_result = reel.center_reel[reel.now_step_position[1] / 10];
+  int right_result = reel.right_reel[reel.now_step_position[2] / 10];
+
+  if(left_result == center_result && left_result == right_result){
+    m_payout_coin_cnt = left_result * 2;
+    showNum(PAYOUT7SEG, m_payout_coin_cnt);
+    hopper.payOutCoin(m_payout_coin_cnt);
+  }
+}
+
 void ResistorGameController::launch(){
+  while(motorPhoto1.readPhoto() == false){  //初期位置
+    motor1.step(1);
+  }
+  while(motorPhoto2.readPhoto() == false){
+    motor2.step(1);
+  }
+  while(motorPhoto3.readPhoto() == false){
+    motor3.step(1);
+  }
+}
+
+void ResistorGameController::launchDark(){
   while(motorPhoto1.readPhoto() == false){  //初期位置
     motor1.step(1);
   }
@@ -210,7 +263,7 @@ void ResistorGameController::showNum(int digit, int num){
   }
 }
 
-void ResistorGameController::startLightSide(){
+void ResistorGameController::startLightMode(){
   launch();  //起動時の動作
 
   while(true){  //メインループ
@@ -220,10 +273,12 @@ void ResistorGameController::startLightSide(){
   }
 }
 
-void ResistorGameController::startDarkSide(){
+void ResistorGameController::startDarkMode(){
   launch();
 
   while(true){
-
+    waitForPushedStartBNDark();
+    reel.start2Stop();
+    payOutCoinsDark();
   }
 }

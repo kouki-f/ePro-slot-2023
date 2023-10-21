@@ -1,4 +1,4 @@
-#include "GameController.h"
+#include "ResistorGameController.h"
 
 int pinArray[] = {
                   80, 2, 3, 4, 5,  //motor1 speed, A1, A2, B1, B2
@@ -23,7 +23,7 @@ int pinArray[] = {
                   21  //coinSelector Din
                   };
 
-GameController game(pinArray);
+ResistorGameController game(pinArray);
 
 void setup() {
   Serial.begin(9600);

@@ -10,7 +10,7 @@ private:
 public:
   SoundEffect(int rx, int tx);
   void begin();
-  void play(int n);
+  void play(int folder, int file);
   void setVolume(int n);
   void volumeUp();
   void volumeDown();

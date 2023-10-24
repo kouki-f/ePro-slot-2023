@@ -12,8 +12,8 @@ void SoundEffect::begin(){
   setVolume(10);
 }
 
-void SoundEffect::play(int n){
-  myDFPlayer.play(n);
+void SoundEffect::play(int folder, int file){
+  myDFPlayer.playFolder(folder, file);
 }
 
 void SoundEffect::setVolume(int n){

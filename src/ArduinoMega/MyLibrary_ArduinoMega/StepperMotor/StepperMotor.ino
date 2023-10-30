@@ -1,15 +1,13 @@
-//#include <Stepper.h>
+#include <Stepper.h>
 #include "StepperMotor.h"
-int speed = 80;
-StepperMotor motor1(speed, 4, 5, 6, 7);
+int speed = 50;
+StepperMotor motor1(speed, 2, 3, 4, 5);
 
 void setup() {
-  pinMode(10, INPUT_PULLUP);
+  //pinMode(10, INPUT_PULLUP);
 }
 
 void loop() {
-  while(digitalRead(10)){
-    motor1.rotateAngle(5);
-  }
-  while(1){}
+  //delay(1000);
+  motor1.step(1);
 }

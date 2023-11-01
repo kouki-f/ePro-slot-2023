@@ -27,7 +27,9 @@ ResistorGameController game(pinArray);
 
 void setup() {
   Serial.begin(9600);
+  game.startLightMode();
 }
 
 void loop() {
+
 }

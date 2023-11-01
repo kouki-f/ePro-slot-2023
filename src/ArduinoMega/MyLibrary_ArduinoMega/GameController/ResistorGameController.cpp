@@ -198,14 +198,10 @@ void ResistorGameController::payOutCoinsDark(){
 }
 
 void ResistorGameController::launch(){
-  while(motorPhoto1.readPhoto() == false){  //初期位置
-    motor1.step(1);
-  }
-  while(motorPhoto2.readPhoto() == false){
-    motor2.step(1);
-  }
-  while(motorPhoto3.readPhoto() == false){
-    motor3.step(1);
+  while(motorPhoto1.readPhoto() == false || motorPhoto2.readPhoto() == false || motorPhoto3.readPhoto() == false){  //初期位置
+    if(motorPhoto1.readPhoto() == false) motor1.step(1);
+    if(motorPhoto2.readPhoto() == false) motor2.step(1);
+    if(motorPhoto3.readPhoto() == false) motor3.step(1);
   }
 }
 

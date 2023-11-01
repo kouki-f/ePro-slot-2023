@@ -104,6 +104,7 @@ private:
   void waitForPushedStartBN();
   void waitForPushedStartBNDark();
   void showNum(int digit, int num);
+  void payOutCoinsDark();
 public:
   ResistorGameController(int* array);
   void startLightMode();  //システムのメイン関数

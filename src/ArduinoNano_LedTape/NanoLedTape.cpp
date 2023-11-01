@@ -17,6 +17,10 @@ void NanoLedTape::showLedPattern(int n){
       break;
     case COIN_INSERTED:
       break;
+    case LOSE:
+      break;
+    case PLAYING:
+      break;
     default:
       break;
   }

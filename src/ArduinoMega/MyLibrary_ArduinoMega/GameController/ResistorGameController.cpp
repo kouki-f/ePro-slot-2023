@@ -29,48 +29,6 @@ ResistorGameController::Reel::Reel(ResistorGameController* gameController){
   gameController = gameController;
 }
 
-// int ResistorGameController::Reel::lot(int bet){
-//   bool big, reg, pierrot, bell, cherry, grape, replay;
-//   int true_cnt = 0;
-
-//   while(true_cnt != 1){
-//     big = rand(big_probability[bet - 1]);
-//     reg = rand(reg_probability[bet - 1]);
-//     pierrot = rand(pierrot_probability[bet - 1]);
-//     bell = rand(bell_probability[bet - 1]);
-//     cherry = rand(cherry_probability[bet - 1]);
-//     grape = rand(grape_probability[bet - 1]);
-//     replay = rand(replay_probability[bet - 1]);
-//     if(big) true_cnt++;
-//     if(reg) true_cnt++;
-//     if(pierrot) true_cnt++;
-//     if(bell) true_cnt++;
-//     if(cherry) true_cnt++;
-//     if(grape) true_cnt++;
-//     if(replay) true_cnt++;
-//     if(true_cnt == 0) return LOSE;
-//     if(true_cnt > 1) true_cnt = 0;
-//   }
-  
-//   if(big){
-//     return BIG;
-//   }else if(reg){
-//     return REG;
-//   }else if(pierrot){
-//     return PIERROT;
-//   }else if(bell){
-//     return BELL;
-//   }else if(cherry){
-//     return CHERRY;
-//   }else if(grape){
-//     return GRAPE;
-//   }else if(replay){
-//     return REPLAY;
-//   }else{
-//     //Error
-//   }
-// }
-
 bool ResistorGameController::Reel::rand(double percent){
   long rand_num = random(0, 100000);
   if(rand_num<percent*1000){
@@ -203,6 +161,11 @@ void ResistorGameController::launch(){
     if(motorPhoto2.readPhoto() == false) motor2.step(1);
     if(motorPhoto3.readPhoto() == false) motor3.step(1);
   }
+  // while(true){
+  //   motor1.step(1);
+  //   motor2.step(1);
+  //   motor3.step(1);
+  // }
 }
 
 void ResistorGameController::launchDark(){

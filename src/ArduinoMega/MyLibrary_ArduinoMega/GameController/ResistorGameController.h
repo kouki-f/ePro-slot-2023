@@ -26,13 +26,6 @@ private:
   class Reel{
   private:
     ResistorGameController* gameController;
-    // double big_probability[3] = {0.037, 0.083, 0.385};  //1枚掛け、２枚掛け、3枚掛け
-    // double reg_probability[3] = {0.037, 0.091, 0.333};
-    // double pierrot_probability[3] = {0.006, 0.040, 0.092};
-    // double bell_probability[3] = {0.006, 0.040, 0.092};
-    // double cherry_probability[3] = {0.055, 1.50, 3.35};
-    // double grape_probability[3] = {3.571, 8.00, 15.38};
-    // double replay_probability[3] = {13.70, 13.70, 13.70};
     enum{
       BLACK = 0,
       BROWN = 1,

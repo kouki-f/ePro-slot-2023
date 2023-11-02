@@ -89,7 +89,7 @@ private:
   };
 
   Reel reel;
-  int bet = 1;
+  int bet = 0;
   int m_payout_coin_cnt;
   void payOutCoins();
   void launch();  //起動音など

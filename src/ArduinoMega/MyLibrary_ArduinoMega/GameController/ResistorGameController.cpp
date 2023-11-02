@@ -14,19 +14,19 @@ ResistorGameController::ResistorGameController(int* array):
   stopBN2(array[27], array[28]),
   stopBN3(array[29], array[30]),
   betBN(array[31], array[32]),
-  payBN(array[34], array[35]),
-  oneDigitSeg(array[36], array[37], array[38], array[39], array[40], array[41], array[42]),
-  threeDigitsSeg(array[57], array[58], array[59], array[60], array[61], array[62], array[63], array[64], array[65], array[66]),
-  motorPhoto1(array[67]),
-  motorPhoto2(array[68]),
-  motorPhoto3(array[69]),
-  coinSelector(array[70]),
+  payBN(array[33], array[34]),
+  oneDigitSeg(array[35], array[36], array[37], array[38], array[39], array[40], array[41]),
+  threeDigitsSeg(array[56], array[57], array[58], array[59], array[60], array[61], array[62], array[63], array[64], array[65]),
+  motorPhoto1(51),
+  motorPhoto2(array[67]),
+  motorPhoto3(array[68]),
+  coinSelector(array[69]),
   reel(this)
 {
 }
 
-ResistorGameController::Reel::Reel(ResistorGameController* gameController){
-  gameController = gameController;
+ResistorGameController::Reel::Reel(ResistorGameController* GameController){
+  gameController = GameController;
 }
 
 bool ResistorGameController::Reel::rand(double percent){
@@ -49,7 +49,11 @@ void ResistorGameController::Reel::start2Stop(){
   while(stopBN1_is_pushed == false || stopBN2_is_pushed == false || stopBN3_is_pushed == false){
     if(stopBN1_is_pushed == false) rotate10Step(1);  //stopBNが押されるまで回転し続ける
     if(stopBN2_is_pushed == false) rotate10Step(2);
-    if(stopBN2_is_pushed == false) rotate10Step(3);
+    if(stopBN3_is_pushed == false) rotate10Step(3);
+
+    // if(stopBN1_is_pushed == false) gameController->motor1.step(1);  //stopBNが押されるまで回転し続ける
+    // if(stopBN2_is_pushed == false) gameController->motor2.step(1);
+    // if(stopBN3_is_pushed == false) gameController->motor3.step(1);
 
     if(gameController->stopBN1.readButton() && stopBN1_is_pushed == false){
       gameController->stopBN1.turnOff();  //BN-LED turn Off
@@ -161,11 +165,6 @@ void ResistorGameController::launch(){
     if(motorPhoto2.readPhoto() == false) motor2.step(1);
     if(motorPhoto3.readPhoto() == false) motor3.step(1);
   }
-  // while(true){
-  //   motor1.step(1);
-  //   motor2.step(1);
-  //   motor3.step(1);
-  // }
 }
 
 void ResistorGameController::launchDark(){

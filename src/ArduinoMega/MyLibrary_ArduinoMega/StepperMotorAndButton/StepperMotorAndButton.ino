@@ -14,6 +14,12 @@ bool stBN2IsPushed = false;
 bool stBN3IsPushed = false;
 
 void setup() {
+  Serial.begin(9600);
+  // while(1){
+  //   startBN.turnOn();
+  //   stopBN1.turnOn();
+  //   stopBN2.turnOn();
+  // }
 }
 
 void loop() {
@@ -29,19 +35,22 @@ void loop() {
     if(!stBN2IsPushed)motor2.step(1);
     if(!stBN3IsPushed)motor3.step(1);
     if(stopBN1.readButton()){
-      stBN1IsPushed == true;
+      stBN1IsPushed = true;
       stopBN1.turnOff();
+      Serial.println("bn1 pushed");
     }
     if(stopBN2.readButton()){
-      stBN2IsPushed == true;
+      stBN2IsPushed = true;
       stopBN2.turnOff();
+      Serial.println("bn2 pushed");
     }
     if(stopBN3.readButton()){
-      stBN3IsPushed == true;
+      stBN3IsPushed = true;
       stopBN3.turnOff();
+      Serial.println("bn3 pushed");
     }
   }
-  stBN1IsPushed == false;
-  stBN2IsPushed == false;
-  stBN3IsPushed == false;
+  stBN1IsPushed = false;
+  stBN2IsPushed = false;
+  stBN3IsPushed = false;
 }
